@@ -1,0 +1,17 @@
+2: Performance expectancy,2: Effort expectancy,2: Social influence,2: Trust,2: Tool understanding,2: Behavioral intention,2: Privacy concerns,2: Anxiety,Cognitive readiness,Age,Gender,Country: Germany,Country: USA,Country: UK,Country: Canada
+2: Performance expectancy,, 0.35*** , 0.74*** , 0.77*** , 0.15*   , 0.73*** ,-0.24*** ,-0.20**  , 0.09    , 0.05    ,-0.08    ,-0.08    , 0.02    , 0.06    ,-0.02    
+2: Effort expectancy,,, 0.26*** , 0.38*** , 0.54*** , 0.23*** ,-0.32*** ,-0.37*** , 0.08    ,-0.10    ,-0.04    ,-0.05    ,-0.18*   , 0.17*   , 0.07    
+2: Social influence,,,, 0.71*** , 0.19**  , 0.78*** ,-0.20**  ,-0.25*** , 0.12    , 0.12    ,-0.19**  ,-0.05    , 0.06    , 0.04    ,-0.08    
+2: Trust,,,,, 0.19**  , 0.72*** ,-0.35*** ,-0.31*** , 0.10    , 0.04    ,-0.19**  ,-0.02    , 0.01    ,-0.04    , 0.07    
+2: Tool understanding,,,,,, 0.15*   ,-0.27*** ,-0.19**  , 0.23*** ,-0.13    ,-0.12    ,-0.06    ,-0.06    , 0.03    , 0.09    
+2: Behavioral intention,,,,,,,-0.26*** ,-0.41*** , 0.08    , 0.11    ,-0.17*   ,-0.09    , 0.07    , 0.08    ,-0.06    
+2: Privacy concerns,,,,,,,, 0.28*** ,-0.05    , 0.16*   , 0.04    ,-0.08    , 0.16*   ,-0.07    , 0.02    
+2: Anxiety,,,,,,,,,-0.05    ,-0.11    , 0.13    ,-0.02    ,-0.02    ,-0.01    , 0.01    
+Cognitive readiness,,,,,,,,,,-0.02    ,-0.07    ,-0.06    , 0.04    ,-0.03    , 0.05    
+Age,,,,,,,,,,,-0.10    ,-0.21**  , 0.04    , 0.18*   , 0.09    
+Gender,,,,,,,,,,,, 0.12    , 0.03    ,-0.10    ,-0.11    
+Country: Germany,,,,,,,,,,,,,-0.45*** ,-0.55*** ,-0.28*** 
+Country: USA,,,,,,,,,,,,,,-0.22**  ,-0.11    
+Country: UK,,,,,,,,,,,,,,,-0.14    
+Country: Canada,,,,,,,,,,,,,,,
+Country: Other,,,,,,,,,,,,,,,

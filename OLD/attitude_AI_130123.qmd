@@ -1,0 +1,932 @@
+---
+title: "Students' attitudes towards AI in Psychiatry"
+#bibliography: "../../config/LMU_AI-Team.bib"
+csl: "../../config/apa.csl"
+execute:
+  echo: false
+  warning: false
+  message: false
+  cache: true
+  include: false
+prefer-html: true
+shorttitle: "Attitudes towards the adoption of two AI-enabled mental health tools among prospective psychotherapists"
+author: "Anne-Kathrin Kleine, Eesha Kokje, Eva Lermer, & Susanne Gaube"
+format: 
+  docx:
+    reference-doc: "../../config/template_word.docx"
+  html:
+    toc: true
+    toc-depth: 3
+---
+
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+```
+
+# Pre-registration statement 
+
+The hypotheses were pre-registered on the Open Science Framework ([osf.io/fqdzb](https://osf.io/fqdzb)). Exploratory hypotheses are identified as such. 
+
+# Introduction
+
+Despite the increasing efforts to develop user-friendly applications, AI systems are still hardly utilized in clinical care [@sendak_etal20]. Reasons for the non-adoption of clinical support tools may be identified on the level of the individual, the organization, and the wider system in which care is embedded [@greenhalgh_etal17; @yusof_etal08]. Initial obstacles on the organization and system level, such as an organization's lack of innovation culture, stakeholder interests, or financial risk factors may hinder the introduction of AI systems in clinical care [@shachak_etal19]. If basic requirements are met, the implementation of clinical support tools heavily depends on the practitioner's willingness to use them. Multiple frameworks and theories have been applied to explain the mechanisms influencing the implementation of clinical support systems in practice [@shachak_etal19; @hsiao_chen16; @kumar_etal23; @wiljer_etal21]. The two most relevant frameworks explaining relevant predictors on the individual level are the unified theory of acceptance and use of technology [UTAUT, @venkatesh22, @venkatesh_etal03, @venkatesh_etal16] and the technology acceptance model [TAM, @davis89].
+
+
+Both UTAUT and TAM consider individual attitudes towards specific technologies, such as perceived usefulness and perceived ease of use (TAM) as relevant drivers of technology acceptance and use on the individual level [@venkatesh22; @davis89]. Multiple research findings highlight the applicability of the UTAUT and the TAM to the context of individual clinical support systems [e.g., @arfi_etal21; @fan_etal20; @lin_etal21; @zhai_etal21; @tran_etal21; @gado_etal22]. However, only one study has investigated the predictors of the intention to use AI-enabled tools in mental healthcare [@gado_etal22]. Based on the UTAUT, evidence was found for the link of perceived social norm, perceived ease of use, and perceived usefulness with students' intention to use AI-enabled tools in mental health practice. 
+
+
+Next to general reluctance against using AI-enabled tools in mental healthcare, (becoming) mental health practitioners may be more skeptical towards some tools. For example, due to the high stakes, psychotherapists may be hesitant to accept AI-generated feedback regarding diagnostic or treatment decisions. At the same time, they may be open to adapting specific elements of their psychotherapy sessions based on AI-generated feedback. The practical utility of current research findings suffers from a lack of specificity in introducing and describing AI-enabled tools when assessing participants' acceptance and willingness to use them. In addressing this research gap, the current study examines the intention to use two specific mental health tools in the current study. The first tool is a psychotherapy feedback tool. The selected AI system analyzes data gathered from therapist-patient conversations to provide performance-specific feedback for the therapist, thus potentially enhancing their motivational interviewing performance [@cummins_etal19; @hirsch_etal18; @tanana_etal19a; @imel_etal19]. A similar tool is already used in practice to improve the quality of care monitoring and enhance the effectiveness of the care delivered [@cummins_etal19; @hirsch_etal18]. The second tool is a treatment recommendation tool. Based on voice recordings, mood scores are generated and used to generate recommendations regarding the urgency of psychotherapeutic support. Again, a similar system is already used in practice [@huang_etal18]. 
+
+
+The current study builds on, yet extends, previous research findings regarding the intention to use AI-enabled mental health tools in four major ways. First, we test the predictors of the individual intention to use two specific mental health tools, thus potentially uncovering factors related to the acceptance of tools characterized by specific technological features designated for certain use cases. Second, based on previous research findings, we extend the original UTAUT model by considering trust, specific understanding of the tools, and general AI knowledge as relevant predictors of students' intention to use the tools in their future jobs [@arfi_etal21; @gado_etal22]. Third, we test the research model among a sample of psychology students and psychotherapists in training, thus increasing the practical relevance of the findings. That is, in contrast to established psychotherapists, psychology students are required to complete in-depth training to become psychotherapists. Accordingly, the current research findings may provide starting points for implementing elements into study curricula and psychotherapy training that enhance students' intention to use AI-enabled tools in their future jobs. Finally, we use regularized structural equation modeling (RegSEM) to study our research model. Instances of multicollinearity and associated suppression effects have been reported repeatedly in studies investigating multiple UTAUT predictors at once [e.g., @bu_etal21; @chimborazo-azogue_etal21; @yoo_etal15]. RegSEM can provide more stable estimates and greater statistical power than non-regularized structural equation models, thus potentially overcoming issues associated with multicollinearity [@friemelt_etal22; @scharf_etal21]. In the following, we briefly describe the two tools investigated in the the current research, before introducing the research model.   
+
+# The AI-enabled feedback tool
+
+Supervision and receiving performance feedback on their therapy sessions support psychotherapy trainees' skills acquisition and increase retention [@tanana_etal19, @moyers_etal05; @helgeronnestad_ladany06]. However, providing ongoing feedback is labor and cost intensive and thus rarely used in training and clinical practice. Accordingly, feedback is often based on trainees' self-reports and is usually only available long after the therapy session [@tanana_etal19]. Using AI technology for mental health care training may help reduce this problem by providing continuous, immediate, and performance-specific feedback to psychotherapists and trainees. For example, _TIM_ (Therapy Insights Model) uses real-time chat messages exchanged between therapists and patients to provide therapists with feedback regarding the topics that were sufficiently covered during the session and the topics that should be addressed in the following sessions [@cummins_etal19]. Another tool, _CORE-MI_ (Counselor Observer Ratings Expert for Motivational Interviewing) uses audio recordings of motivational interviewing (MI)^[A counseling method to enhance a patient's motivation to change.] sessions to generate feedback on psychotherapists' adherence to MI principles. The user receives feedback on six summary measures of MI fidelity: empathy, MI spirit, reflection-to-question ratio, percent open questions, percent complex reflections, and percent MI adherence. _CORE-MI_ includes a visual summary of counseling sessions based on the fidelity assessment that the therapist may use to improve their MI performance [@hirsch_etal18]. The tool chosen for the current study was developed based on _CORE-MI_. Speech data recorded during a psychotherapy session is processed and analyzed using ML models to generate feedback for psychotherapists regarding their adherence to MI principles and possibilities for improvement. @fig-feedback shows the output generated by the feedback tool used in the current study. 
+
+
+
+```{r, fig.width = 12}
+#| include: true
+#| label: fig-feedback
+#| fig-cap: The output slide of the AI-enabled feedback tool 
+
+library(tiff)
+library(grid)
+grid.raster(readTIFF("Figures/feedback.tiff"))
+```
+
+# The AI-enabled treatment recommendation
+
+Major depressive disorder patients hold a 40% risk of non-fatal lifetime suicide attempts [@sokero_etal05]. Timely psychotherapeutic support may lower the risk of aggravation of depressive symptoms and suicidality [@calati_courtet16]. AI-enabled emotion analysis have proven to be effective in assessing patients' depressive states and potentially recommending immediate intervention, thus advancing mental healthcare [@jan_etal18; @huang_etal18]. Over the past years, systems have been developed that monitor or assess the mood of individuals with mental disorders, such as depression or bipolar disorder, using speech data [@karam_etal17; @khan_etal16]. For example, the patient may be provided with the option to record voice samples through an application installed on their mobile phone. The recorded data is then analyzed using an automated speech data classifier that may assess the patient's current mood [@karam_etal17]. A mental health practitioner may use the tool to decide whether urgent intervention is needed and whether a specific patient needs to be given preference if treatment time is limited (see [SondeHealth.com](https://www.sondehealth.com/mental-health)). The tool chosen for the current study is based on the tool developed by _SondeHealth_. The patient is requested to record a voice message answering a predetermined question using their mobile phone. The voice data is used in ML models to generate a mood score. Psychotherapists may use the mood score information to decide whether emergency intervention is necessary and whether a patient needs to be given preference in treatment. @fig-depression shows the output generated by the depression severity detection tool used in the current study.
+
+
+```{r, fig.width = 12}
+#| include: true
+#| label: fig-depression
+#| fig-cap: The output slide of the AI-enabled feedback tool 
+
+library(tiff)
+library(grid)
+grid.raster(readTIFF("Figures/depression.tiff"))
+```
+
+
+# Research model and hypotheses development
+
+The first goal of the current research is to test the applicability of a modified version of the UTAUT in the mental health context to understand the factors that influence the intention to use two specific AI-enabled mental healthcare tools [@gado_etal22; @venkatesh22; @venkatesh_etal03; @venkatesh_etal16]. 
+In line with the UTAUT, we propose tool-specific performance expectancy (i.e., the degree to which an individual believes that using a system will enhance their performance) and effort expectancy (i.e., the degree of ease associated with using the technology) to predict the behavioral intention to use the two tools in their future jobs. 
+
+*Hypothesis 1*: There is a positive relationship between psychology students' perceived performance expectancy and their intention to use the tools in their future job. 
+
+*Hypothesis 2*: There is a positive relationship between psychology students' perceived effort expectancy and their intention to use the tools in their future job. 
+
+In contrast to practicing psychotherapists, psychology students and psychotherapists in training are less influenced by habits and established work processes that may hinder the adoption of new AI technologies [@venkatesh_etal16]. Instead, students are likely more susceptible to the influence of their peers and the perceived norms and values of their future employers [@owusu_etal22]. Thus, we suggest the UTUAT variable social influence (i.e., the perception that important others believe that the system should be used) as a predictor of students' intention to use the feedback tool.
+
+*Hypothesis 3*: There is a positive relationship between social influence and students' intention to use the tool in their future job.
+
+It has been argued that if the level of risk associated with a technology is high, trust becomes a relevant predictor of the intention to use it [@arfi_etal21]. Accordingly, due to the sensitive nature of the data used and the recommendations made by the tools, we propose trust to act as a predictor of students' intention to use the tools. In addition, we argue that due to the critical nature of the treatment recommendation tool, levels of trust and the relationship between trust and the intention to use the tool will differ between the two tools. Accordingly, we propose an additional exploratory hypothesis. 
+
+*Hypothesis 4*: There is a positive relationship between students' trust in the tools and their intention to use them in their future jobs.
+
+*Exploratory Hypothesis 4*: a) the level of trust in the treatment recommendation tool will be lower than the level of trust in the feedback tool, and b) the relationship between trust and the intention to use the tool will be stronger for the treatment recommendation tool than for the feedback tool. 
+
+The skepticism against specific AI-enabled tools in mental healthcare is nurtured by a lack of understanding of how recommendations are generated [@aafjes-vandoorn_etal21; @chekroud_etal21].
+Especially in mental healthcare, where transparency and the explainability of clinical decision-making are highly valued, the black box problem of AI-based recommendations creates an obstacle to adopting specific AI tools [@aafjes-vandoorn_etal21; @chekroud_etal21; @kelly_etal19]. 
+
+We argue that the relationship between knowledge and intention to use is mediated through performance expectancy, effort expectancy, and trust. According to the New Framework for Theorizing and Evaluating Nonadoption, Abandonment, and Challenges to the Scale-Up, Spread, and Sustainability of Health and Care Technologies [NASSS, @greenhalgh_etal17], knowledge of technology predicts its perceived demand-side value. Students who possess the knowledge and skills necessary to apply the tools and understand how the recommendations are derived are more likely to perceive them as useful. In addition, a general understanding of how the AI recommendations are derived may strengthen students' competence in using the tool in their future jobs and leverage some ethical concerns [@seufert_etal21; @gado_etal22]. Accordingly, we extend the UTAUT model by including cognitive technology readiness as an indicator of general AI knowledge and specific understanding of the tool as an indicator of specific AI knowledge as predictors of performance expectancy, effort expectancy, and trust. Because we pre-registered two research questions to test this relationship, we propose the following two exploratory hypotheses:
+
+*Exploratory Hypothesis 5*: The positive relationship between cognitive technology readiness and the intention to use the tool is mediated through a) performance expectancy, b) effort expectancy, and c) trust in the tool. 
+
+*Exploratory Hypothesis 6*: The positive relationship between understanding the tool and the intention to use the tool is mediated through a) performance expectancy, b) effort expectancy, and c) trust in the tool. 
+
+
+# Methods
+
+##  Participants
+
+## Measurement instruments 
+
+### Therapist feedback tool 
+
+![Core MI Feedback Tool](../figs/core_mi_report.png)
+### Independent variables 
+
+- PerfExp: Performance expectancy (perceived usefulness) [@venkatesh_etal03, @gado_etal22]; all slightly adapted:
+
+- EffExp: Effort expectancy (perceived ease of use) [@venkatesh_etal03, @gado_etal22]; all slightly adapted:
+
+- SocInf: Perceived social norm [@venkatesh_etal03, @gado_etal22]; all slightly adapted:
+
+- trust: Trust in the tools
+
+- dxunder3_1: specific understanding of the tool 
+ 
+- cog_read: cognitive technology readiness (general understanding of AI)
+
+  
+### Dependent variable
+
+- Beh_Int: Intention to Use the Tool (Intention to use the tool [@venkatesh_etal03, @gado_etal22]; all slightly adapted)
+
+### Control variables
+
+- knowAI7 (stats knowledge)
+- knowAI4 (AI knowledge)
+- job_anx
+- soctechblind
+- Age
+- Gender
+- Country
+
+
+# Data analysis
+
+The data was analyzed using *R*. First, we calculated descriptive statistic summaries, including mean values, standard deviations, and correlations between study variables for each tool. In addition, we used the *lavaan* package in *R* to investigate the fit of the measurement models for the two devices through confirmatory factor analysis. We compared the theoretical measurement models to two more parsimonious alternative models to assess whether the variables included in the two models are sufficiently distinct. 
+
+
+Second, we used the *lavaan* package for structural equation modeling (SEM) paired t-tests to compare the levels of performance expectancy, effort expectancy, social influence, trust, and specific understanding between the two tools, thus answering *Exploratory Hypothesis 4a*. Third, we used the *regsem* package in *R* [@jacobucci_etal22] to analyze the relationship between the predictor variables and the intention to use the tool to answer hypotheses 1 through 4 and *Hypothesis 4b*. Finally, we used the *regsem* package to test the exploratory mediation models [*Hypotheses 5* and *6*, @serang_etal17].
+
+# Results
+
+```{r read_data}
+## Read in data
+library("readxl")
+library(tidyverse)
+data_prolific <- read_excel("../../data/Student_quest/data_prolific.xlsx", col_names = T) %>% .[-1, ] %>% data.frame(.)
+data <- read_excel("../../data/Student_quest/data.xlsx", col_names = T) %>% .[-1, ] %>% data.frame(.)
+
+source("../../R/custom-functions.R")
+```
+
+```{r}
+library(gtools)
+data_all <- smartbind(data_prolific, data)
+```
+
+
+```{r}
+## Attention checks
+data_all <- data_all %>% rename(
+  att_1 = gattAI1_7,
+  att_2 = learn_anx_3,
+  att_3 = dapriv1_5,
+  att_4 = SocInf2_4
+)
+```
+
+```{r}
+## Remove rows with more than 90% NA
+data_all <- data_all[which(!rowMeans(is.na(data_all)) > 0.9), ]
+data_all <- data_all[!(data_all$Prolific_ID %in% "ggg"), ]
+
+
+cat("In total,", nrow(data_all), "participants took part in the study. Of those,", nrow(data_all[is.na(data_all$PROLIFIC_PID), ]), "were recruited through social networks and raching out to univseristies. In addition,", nrow(data_all[is.na(data_all$PROLIFIC_PID), ]), "were recruited through prolific.")
+
+## create attention fails df 
+att_1_fail <- data_all[(data_all$att_1 %in% c("1.0", "3.0", "4.0", "5.0")), ]
+att_2_fail <- data_all[(data_all$att_2 %in% c("1.0", "2.0", "3.0", "4.0", "5.0", "7.0")), ]
+att_3_fail <- data_all[(data_all$att_3 %in% c("1.0", "2.0", "4.0", "5.0", "6.0", "7.0")), ]
+att_4_fail <- data_all[(data_all$att_4 %in% c("1.0", "2.0", "3.0", "4.0")), ]
+
+
+(attention_fail <- rbind(att_1_fail, att_2_fail, att_3_fail, att_4_fail) %>%
+  as_tibble(.)) 
+
+(ID_vals <- data.frame(table(attention_fail$ResponseId)))
+
+(Rows_fails <- attention_fail$ResponseId %in% ID_vals[ID_vals$Freq > 2,1])
+
+(Att_fails <- attention_fail[Rows_fails,])
+
+(data.frame(table(Att_fails$ResponseId)))
+
+## exclude attention fails (more than two fails)
+data_all_noatt <- data_all[!(data_all$ResponseId %in% Att_fails$ResponseId),]
+
+
+cat((nrow(data_all) - nrow(data_all_noatt)), "participants were excluded because they failed at least two of four attention check items.")
+```
+
+```{r}
+## Rename and recode
+## rename
+names(data_all) <- gsub("d2priv", "dapriv2", names(data_all))
+  
+data_num <- data_all %>% 
+  select(-matches("Prolific_ID|knowAI3|knowAI6|under4|country|masters_3_TEXT|degree|email|Date|IBA|Progress|Duration|Finished|ResponseI|Recipient|Reference|LocationLat|LocationLon|Channel|UserL|consent")) %>%
+  mutate_if(is.character, as.numeric)
+
+data_char <- data_all %>% 
+  select(matches("Prolific_ID|knowAI3|knowAI6|under4|country|masters_3_TEXT|degree|email"))
+
+data_all <- cbind(data_num, data_char)
+
+data_all %>% filter_at(vars(d1under1,d1under2),all_vars(is.na(.)))
+
+## create lack of understanding variable
+data_all <- data_all %>% 
+   mutate(lackunder1 = 
+            case_when(
+              d1under1 == 1 | d1under2 == 1 ~ 1,
+              d1under1 == 2 | d1under2 == 2 ~ 2))
+
+
+## recode
+recode_5 <- function(x) {               
+  x * (-1)+6
+}
+recode_8 <- function(x) {               
+  x * (-1)+9
+}
+
+data_recode_5 <- apply(select(data_all, matches("gattAI1_3|gattAI1_6|gattAI1_8|gattAI1_9|gattAI1_10|gattAI2_5|gattAI2_9|gattAI2_10")), 2, recode_5)   
+
+data_all[ , colnames(data_all) %in% colnames(data_recode_5)] <- data_recode_5
+
+data_recode_8 <- apply(select(data_all, matches("dapriv1_4|dapriv1_6|dapriv1_7|dapriv2_4|dapriv2_5|dapriv2_6")), 2, recode_5)   
+
+data_all[ , colnames(data_all) %in% colnames(data_recode_8)] <- data_recode_8
+
+```
+
+```{r}
+## Make composite data frame
+library(sjlabelled)
+
+data_comp <- data_all %>% select(matches("gatt|cog_read|vision|ethic|_anx|techblind|PerfExp|EffExp|SocInf|FacCond|attitude|Beh_Int|anxty|self_eff|priv|trust")) %>% mutate_if(is.character, as.numeric)
+
+
+demos <- data_all %>% select(matches("under1|under2|under3|knowAI1|knowAI2|knowAI4|knowAI5|knowAI7|^Age$|Gender|^country$|commitment")) %>%  mutate_if(is.character, as.numeric)
+text_data <- data_all %>% select(matches("country_3_TEXT|uni|master|degree|knowAI3|knowAI6|under4|invite_raffle|invite_follow|email"))
+
+names(data_comp) <- gsub("_read", "read", names(data_comp))
+names(data_comp) <- gsub("_anx", "anx", names(data_comp))
+names(data_comp) <- gsub("Beh_Int", "BehInt", names(data_comp))
+names(data_comp) <- gsub("self_eff", "selfeff", names(data_comp))
+
+
+comp_split <- data_comp %>% remove_all_labels(.) %>%
+  split.default(sub("_.*", "", names(data_comp)))
+
+comp <- purrr::map(comp_split, ~ rowMeans(.x, na.rm=TRUE))
+alph <- purrr::map(comp_split, ~ psych::alpha(.x), data = .x) %>%
+  purrr::map(~ .x$total)
+
+comp_df <- do.call("cbind", comp) %>% as.data.frame(.) %>%  cbind(., demos) %>% remove_all_labels(.)
+alph_df <- do.call("rbind", alph) %>% round(., 2)
+```
+
+## Reliabilities
+
+```{r reliabilities, include = T}
+# prolific 
+rel_tab <- alph_df %>%
+DT::datatable(
+    extensions = 'Buttons', 
+    options = list(dom = 'Bfrtip', 
+                   buttons = c('excel', "csv"),
+                   pageLength = 20))
+
+rel_tab
+write.table(alph_df, file = "Tables/rels.txt", sep = ",", quote = FALSE, row.names = T)
+
+```
+
+## Correlations
+
+```{r}
+# select only numeric 
+comp_df_mum <- comp_df[ , purrr::map_lgl(comp_df, is.numeric)]
+
+comp_df_mum_1 <- comp_df %>% select(matches("anxty1|BehInt1|cogread|EffExp1|jobanx|PerfExp1|SocInf1|soctechblind|trust1|knowAI4_1|knowAI7_1|d1under3_1|Age|Gender|country"))
+
+comp_df_mum_2 <- comp_df %>% select(matches("anxty2|BehInt2|cogread|EffExp2|jobanx|PerfExp2|SocInf2|soctechblind|trust2|knowAI4_1|knowAI7_1|d2under3_1|Age|Gender|country"))
+
+
+cor_tab_1 <- corstars(comp_df_mum_1, removeTriangle = "upper")
+cor_tab_2 <- corstars(comp_df_mum_2, removeTriangle = "lower")
+
+cor_tab_1 %>%
+  DT::datatable(
+    extensions = 'Buttons', 
+    options = list(dom = 'Bfrtip', 
+                   buttons = c('excel', "csv"),
+                   pageLength = 35,
+                  lengthMenu = c(20, 20, 20, 20)))
+
+cor_tab_2 %>%
+  DT::datatable(
+    extensions = 'Buttons', 
+    options = list(dom = 'Bfrtip', 
+                   buttons = c('excel', "csv"),
+                   pageLength = 35,
+                  lengthMenu = c(20, 20, 20, 20)))
+
+```
+
+```{r}
+write.table(cor_tab_1, file = "Tables/cors_1.txt", sep = ",", quote = FALSE, row.names = T)
+
+write.table(cor_tab_2, file = "Tables/cors_2.txt", sep = ",", quote = FALSE, row.names = T)
+
+cor_tab_1[upper.tri(cor_tab_1)] <- cor_tab_2[upper.tri(cor_tab_2)]
+
+write.table(cor_tab_1, file = "Tables/cors.txt", sep = ",", quote = FALSE, row.names = T)
+```
+
+
+```{r}
+model_full <- '
+gatt =~ gattAI1_1 + gattAI1_2 + gattAI1_3 + gattAI1_4 + gattAI1_5 + gattAI1_6 + gattAI1_8 + 
+            gattAI1_9 + gattAI1_10 + gattAI1_11 + gattAI2_1 + gattAI2_2 + gattAI2_3 + gattAI2_4 + 
+            gattAI2_5 + gattAI2_6 + gattAI2_7 + gattAI2_8 + gattAI2_9 + gattAI2_10
+'
+
+model_fit <- lavaan::cfa(model_full, data=data_all, missing = "fiml")
+cfa_gatt <- summary(model_fit, standardized=TRUE, fit = TRUE)
+cfa_gatt
+```
+
+## CFA
+
+```{r}
+library(lavaan)
+
+# GENERAL UNDERSTANDING:
+# cogread = general understanding of AI (visionread, ethicread)
+
+# SPECIFIC UNDERSTANDING:
+# d1under1 = 1 
+# d1under2 = 1 
+# d1under3 = understanding of the feedback tool
+
+# PERFORMANCE EXPECTANCY 
+# PerfExp1
+
+# EFFORT EXPECTANCY 
+# EffExp1
+
+# SOCIAL INFLUENCE
+# SocInf1
+
+# TRUST
+# trust1
+
+# BEHAVIORAL INTENTION 
+# BehInt 
+
+# CONTROLS: 
+# knowAI7 (stats knowledge)
+# knowAI4 (AI knowledge)
+# job_anx
+# soctechblind
+# Age
+# Gender
+# Country 
+
+```
+
+### Tool 1
+```{r}
+
+model_full <- '
+cogread =~ cog_read_1 + cog_read_2 + cog_read_3 + cog_read_4 + cog_read_5
+
+PerfExp1 =~ PerfExp1_1 + PerfExp1_2 + PerfExp1_3 + PerfExp1_4 + PerfExp1_5
+EffExp1 =~ EffExp1_1 + EffExp1_2 + EffExp1_3 + EffExp1_4
+SocInf1 =~ SocInf1_1 + SocInf1_2 + SocInf1_3 + SocInf1_4 + SocInf1_5
+Trust1 =~ trust1_1 + trust1_2 + trust1_3
+d1under  =~ d1under3_1
+BehInt1 =~ Beh_Int1_1 + Beh_Int1_2 + Beh_Int1_3
+
+# controls
+job_anx =~ job_anx_1 + job_anx_2 + job_anx_3 + job_anx_4 + job_anx_5 + job_anx_6
+
+soctechblind =~ soctechblind_1 + soctechblind_2 + soctechblind_3 + soctechblind_4
+
+d1under3_1 ~~ 0*d1under3_1
+'
+
+model_fit <- lavaan::cfa(model_full, data=data_all, missing = "fiml")
+cfa_tool1 <- summary(model_fit, standardized=TRUE, fit = TRUE)
+cfa_tool1
+
+write.table(cfa_tool1$fit, file = "Tables/fit_1.txt", sep = ",", quote = FALSE, row.names = T)
+```
+
+
+
+```{r}
+#### PE + EU
+model_PEEU <- '
+cogread =~ cog_read_1 + cog_read_2 + cog_read_3 + cog_read_4 + cog_read_5
+
+PerfExp1 =~ PerfExp1_1 + PerfExp1_2 + PerfExp1_3 + PerfExp1_4 + PerfExp1_5 + EffExp1_1 + EffExp1_2 + EffExp1_3 + EffExp1_4
+SocInf1 =~ SocInf1_1 + SocInf1_2 + SocInf1_3 + SocInf1_4 + SocInf1_5
+Trust1 =~ trust1_1 + trust1_2 + trust1_3
+d1under  =~ d1under3_1
+BehInt1 =~ Beh_Int1_1 + Beh_Int1_2 + Beh_Int1_3
+
+# controls
+job_anx =~ job_anx_1 + job_anx_2 + job_anx_3 + job_anx_4 + job_anx_5 + job_anx_6
+
+soctechblind =~ soctechblind_1 + soctechblind_2 + soctechblind_3 + soctechblind_4
+
+d1under3_1 ~~ 0*d1under3_1
+'
+
+model_fit_PEEU <- cfa(model_PEEU, data=data_all, missing = "fiml")
+summary(model_fit_PEEU, standardized=TRUE, fit = TRUE)
+```
+
+
+
+```{r}
+#### Specific + General
+model_SG <- '
+cogread =~ cog_read_1 + cog_read_2 + cog_read_3 + cog_read_4 + cog_read_5 + d1under3_1
+
+PerfExp1 =~ PerfExp1_1 + PerfExp1_2 + PerfExp1_3 + PerfExp1_4 + PerfExp1_5
+EffExp1 =~ EffExp1_1 + EffExp1_2 + EffExp1_3 + EffExp1_4
+SocInf1 =~ SocInf1_1 + SocInf1_2 + SocInf1_3 + SocInf1_4 + SocInf1_5
+Trust1 =~ trust1_1 + trust1_2 + trust1_3
+BehInt1 =~ Beh_Int1_1 + Beh_Int1_2 + Beh_Int1_3
+
+# controls
+job_anx =~ job_anx_1 + job_anx_2 + job_anx_3 + job_anx_4 + job_anx_5 + job_anx_6
+
+soctechblind =~ soctechblind_1 + soctechblind_2 + soctechblind_3 + soctechblind_4
+
+'
+
+model_fit_SG <- cfa(model_SG, data=data_all, missing = "fiml")
+summary(model_fit_SG, standardized=TRUE, fit = TRUE)
+```
+
+### Tool 2
+
+```{r}
+model_full <- '
+cogread =~ cog_read_1 + cog_read_2 + cog_read_3 + cog_read_4 + cog_read_5
+
+PerfExp2 =~ PerfExp2_1 + PerfExp2_2 + PerfExp2_3 + PerfExp2_4 + PerfExp2_5
+EffExp2 =~ EffExp2_1 + EffExp2_2 + EffExp2_3 + EffExp2_4 
+SocInf2 =~ SocInf2_1 + SocInf2_2 + SocInf2_3 + SocInf2_5 + SocInf2_6
+Trust2 =~ trust2_1 + trust2_2 + trust2_3
+d2under  =~ d2under3_1
+BehInt2 =~ Beh_Int2_1 + Beh_Int2_2 + Beh_Int2_3
+
+# controls
+job_anx =~ job_anx_1 + job_anx_2 + job_anx_3 + job_anx_4 + job_anx_5 + job_anx_6
+
+soctechblind =~ soctechblind_1 + soctechblind_2 + soctechblind_3 + soctechblind_4
+
+d2under3_1 ~~ 0*d2under3_1
+'
+
+model_fit <- cfa(model_full, data=data_all, missing = "fiml")
+
+cfa_tool2 <- summary(model_fit, standardized=TRUE, fit = TRUE)
+cfa_tool2
+
+write.table(cfa_tool1$fit, file = "Tables/fit_2.txt", sep = ",", quote = FALSE, row.names = T)
+```
+
+
+
+```{r}
+#### PE + EU
+model_PEEU <- '
+cogread =~ cog_read_1 + cog_read_2 + cog_read_3 + cog_read_4 + cog_read_5
+
+PerfExp2 =~ PerfExp2_1 + PerfExp2_2 + PerfExp2_3 + PerfExp2_4 + PerfExp2_5 + EffExp2_1 + EffExp2_2 + EffExp2_3 + EffExp2_4 
+SocInf2 =~ SocInf2_1 + SocInf2_2 + SocInf2_3 + SocInf2_5 + SocInf2_6
+Trust2 =~ trust2_1 + trust2_2 + trust2_3
+d2under  =~ d2under3_1
+BehInt2 =~ Beh_Int2_1 + Beh_Int2_2 + Beh_Int2_3
+
+# controls
+job_anx =~ job_anx_1 + job_anx_2 + job_anx_3 + job_anx_4 + job_anx_5 + job_anx_6
+
+soctechblind =~ soctechblind_1 + soctechblind_2 + soctechblind_3 + soctechblind_4
+
+d2under3_1 ~~ 0*d2under3_1
+'
+
+model_fit_PEEU <- cfa(model_PEEU, data=data_all, missing = "fiml")
+summary(model_fit_PEEU, standardized=TRUE, fit = TRUE)
+```
+
+
+
+```{r}
+library(lavaan)
+#### Specific + General
+model_SG <- '
+cogread =~ cog_read_1 + cog_read_2 + cog_read_3 + cog_read_4 + cog_read_5 + d2under3_1
+
+PerfExp2 =~ PerfExp2_1 + PerfExp2_2 + PerfExp2_3 + PerfExp2_4 + PerfExp2_5
+EffExp2 =~ EffExp2_1 + EffExp2_2 + EffExp2_3 + EffExp2_4 
+SocInf2 =~ SocInf2_1 + SocInf2_2 + SocInf2_3 + SocInf2_5 + SocInf2_6
+Trust2 =~ trust2_1 + trust2_2 + trust2_3
+BehInt2 =~ Beh_Int2_1 + Beh_Int2_2 + Beh_Int2_3
+
+# controls
+job_anx =~ job_anx_1 + job_anx_2 + job_anx_3 + job_anx_4 + job_anx_5 + job_anx_6
+
+soctechblind =~ soctechblind_1 + soctechblind_2 + soctechblind_3 + soctechblind_4
+'
+
+model_fit_SG <- cfa(model_SG, data=data_all, missing = "fiml")
+summary(model_fit_SG, standardized=TRUE, fit = TRUE)
+```
+
+## Hypotheses tests 
+
+### Mean comparisons
+
+```{r}
+#| include: true
+model.1 <- '
+PerfExp1 ~~ PerfExp2
+PerfExp1 ~~ PerfExp1
+PerfExp2 ~~ PerfExp2
+
+PerfExp1 ~ m_PerfExp1 * 1
+PerfExp2 ~ m_PerfExp2 * 1
+
+diff := m_PerfExp1 - m_PerfExp2
+'
+fit.1 <- lavaan::sem(model.1, data=comp_df)
+summary(fit.1)
+```
+
+```{r}
+#| include: true
+model.1 <- '
+EffExp1 ~~ EffExp2
+EffExp1 ~~ EffExp1
+EffExp2 ~~ EffExp2
+
+EffExp1 ~ m_EffExp1 * 1
+EffExp2 ~ m_EffExp2 * 1
+
+diff := m_EffExp1 - m_EffExp2
+'
+fit.1 <- lavaan::sem(model.1, data=comp_df)
+summary(fit.1)
+```
+
+```{r}
+#| include: true
+model.1 <- '
+SocInf1 ~~ SocInf2
+SocInf1 ~~ SocInf1
+SocInf2 ~~ SocInf2
+
+SocInf1 ~ m_SocInf1 * 1
+SocInf2 ~ m_SocInf2 * 1
+
+diff := m_SocInf1 - m_SocInf2
+'
+fit.1 <- lavaan::sem(model.1, data=comp_df)
+summary(fit.1)
+```
+
+```{r}
+#| include: true
+model.1 <- '
+d1under1 ~~ d2under1
+d1under1 ~~ d1under1
+d2under1 ~~ d2under1
+
+d1under1 ~ m_d1under1 * 1
+d2under1 ~ m_d2under1 * 1
+
+diff := m_d1under1 - m_d2under1
+'
+fit.1 <- lavaan::sem(model.1, data=comp_df)
+summary(fit.1)
+```
+
+
+```{r}
+#| include: true
+model.1 <- '
+BehInt1 ~~ BehInt2
+BehInt1 ~~ BehInt1
+BehInt2 ~~ BehInt2
+
+BehInt1 ~ m_BehInt1 * 1
+BehInt2 ~ m_BehInt2 * 1
+
+diff := m_BehInt1 - m_BehInt2
+'
+fit.1 <- lavaan::sem(model.1, data=comp_df)
+summary(fit.1)
+```
+
+
+```{r}
+model_hypo <- '
+cogread =~ cog_read_1 + cog_read_2 + cog_read_3 + cog_read_4 + cog_read_5
+
+PerfExp1 =~ PerfExp1_1 + PerfExp1_2 + PerfExp1_3 + PerfExp1_4 + PerfExp1_5
+EffExp1 =~ EffExp1_1 + EffExp1_2 + EffExp1_3 + EffExp1_4
+SocInf1 =~ SocInf1_1 + SocInf1_2 + SocInf1_3 + SocInf1_4 + SocInf1_5
+Trust1 =~ trust1_1 + trust1_2 + trust1_3
+d1under  =~ d1under3_1
+BehInt1 =~ Beh_Int1_1 + Beh_Int1_2 + Beh_Int1_3
+
+
+PerfExp2 =~ PerfExp2_1 + PerfExp2_2 + PerfExp2_3 + PerfExp2_4 + PerfExp2_5
+EffExp2 =~ EffExp2_1 + EffExp2_2 + EffExp2_3 + EffExp2_4 
+SocInf2 =~ SocInf2_1 + SocInf2_2 + SocInf2_3 + SocInf2_5 + SocInf2_6
+Trust2 =~ trust2_1 + trust2_2 + trust2_3
+d2under  =~ d2under3_1
+BehInt2 =~ Beh_Int2_1 + Beh_Int2_2 + Beh_Int2_3
+
+# controls
+job_anx =~ job_anx_1 + job_anx_2 + job_anx_3 + job_anx_4 + job_anx_5 + job_anx_6
+soctechblind =~ soctechblind_1 + soctechblind_2 + soctechblind_3 + soctechblind_4
+
+d1under3_1 ~~ 0*d1under3_1
+d2under3_1 ~~ 0*d2under3_1
+
+BehInt1 ~ p1*PerfExp1 + e1*EffExp1 + s1*SocInf1 + t1*Trust1 + 
+          cj1*job_anx + cs1*soctechblind + ck11* knowAI4_1 + ck21*knowAI7_1 + ca1*Age + cg1*Gender +
+          cc1*country
+          
+BehInt2 ~ p2*PerfExp2 + e2*EffExp2 + s2*SocInf2 + t2*Trust2 + 
+          cj2*job_anx + cs2*soctechblind + k12* knowAI4_1 + ck22*knowAI7_1 + ca2*Age + cg2*Gender +
+          cc2*country
+'
+
+model_fit <- cfa(model_hypo, data=data_all, missing = "fiml")
+summary(model_fit, standardized=TRUE, fit = TRUE)
+```
+
+### RegSEM
+
+```{r}
+#| include: true
+library(ISLR)
+library(regsem) # we recommend using version 0.50 or later
+
+#lavaan model with all mediators
+model1 <-
+' 
+# Tool 1
+# cogread =~ cog_read_1 + cog_read_2 + cog_read_3 + cog_read_4 + cog_read_5
+# PerfExp1 =~ PerfExp1_1 + PerfExp1_2 + PerfExp1_3 + PerfExp1_4 + PerfExp1_5
+# EffExp1 =~ EffExp1_1 + EffExp1_2 + EffExp1_3 + EffExp1_4
+# SocInf1 =~ SocInf1_1 + SocInf1_2 + SocInf1_3 + SocInf1_4 + SocInf1_5
+# trust1 =~ trust1_1 + trust1_2 + trust1_3
+# BehInt1 =~ Beh_Int1_1 + Beh_Int1_2 + Beh_Int1_3
+# 
+# jobanx =~ job_anx_1 + job_anx_2 + job_anx_3 + job_anx_4 + job_anx_5 + job_anx_6
+# soctechblind =~ soctechblind_1 + soctechblind_2 + soctechblind_3 + soctechblind_4
+
+# direct effect
+BehInt1 ~ p1*PerfExp1 + e1*EffExp1 + s1*SocInf1 + t1*trust1 + 
+          cj1*jobanx + cs1*soctechblind + ck11*knowAI4_1 + ck21*knowAI7_1 + ca1*Age + cg1*Gender +
+          cc1*country + cogread + d1under3_1 
+ 
+# Tool 2          
+# cogread =~ cog_read_1 + cog_read_2 + cog_read_3 + cog_read_4 + cog_read_5
+# PerfExp2 =~ PerfExp2_1 + PerfExp2_2 + PerfExp2_3 + PerfExp2_4 + PerfExp2_5
+# EffExp2 =~ EffExp2_1 + EffExp2_2 + EffExp2_3 + EffExp2_4
+# SocInf2 =~ SocInf2_1 + SocInf2_2 + SocInf2_3 + SocInf2_4 + SocInf2_5
+# trust2 =~ trust2_1 + trust2_2 + trust2_3
+# BehInt2 =~ Beh_Int2_1 + Beh_Int2_2 + Beh_Int2_3
+# 
+# jobanx =~ job_anx_1 + job_anx_2 + job_anx_3 + job_anx_4 + job_anx_5 + job_anx_6
+# soctechblind =~ soctechblind_1 + soctechblind_2 + soctechblind_3 + soctechblind_4
+
+# direct effect
+BehInt2 ~ p2*PerfExp2 + e2*EffExp2 + s2*SocInf2 + t2*trust2 + 
+          cj2*jobanx + cs2*soctechblind + ck12*knowAI4_1 + ck22*knowAI7_1 + ca2*Age + cg2*Gender +
+          cc2*country + cogread + d2under3_1 
+'
+fit.delta = lavaan::sem(model1,data = comp_df)
+
+summary(fit.delta)
+```
+
+
+```{r}
+#identify parameter numbers to penalize with pars_pen
+options(max.print=1000000)
+extractMatrices(fit.delta)$A
+
+#exploratory analysis via regularization
+#Stage 1
+#find tuning parameter
+fit.reg.tune = cv_regsem(model = fit.delta,type = "lasso",fit.ret = c("rmsea", "BIC", "chisq"), n.lambda = 100, jump = 0.005, pars_pen = "regressions", multi.iter = TRUE)
+```
+
+
+```{r}
+#| include: true
+#find minimum BIC value and associated lambda value
+bics = fit.reg.tune[[2]][,"BIC"]
+# remove the one that did not converge
+bics<- bics[bics >= 0]  
+
+
+plot(seq(0,0.495,by = 0.005),bics,main = "BIC by lambda",
+xlab = "lambda",ylab = "BIC")
+plot(fit.reg.tune,show.minimum="BIC")
+
+min.bic = min(bics)
+lambda = fit.reg.tune[[2]][which(bics == min.bic),"lambda"]
+#fit model with selected value of lambda
+
+fit.reg1 = multi_optim(fit.delta,type = "lasso",lambda = lambda)
+
+result_penal <- summary(fit.reg1)
+
+#names(result_penal$estimates)[result_penal$estimates == 0]
+#names(result_penal$estimates)[!result_penal$estimates == 0]
+
+#Stage 2
+#refit model with only selected mediators
+model2 <-
+'# Tool 1
+# direct effect
+BehInt1 ~ PerfExp1 + 
+          EffExp1 + 
+          SocInf1 + 
+          trust1 + 
+          jobanx + 
+          soctechblind + 
+          cogread 
+          #ck11*knowAI4_1 + 
+          #ck21*knowAI7_1 + 
+          #ca1*Age + 
+          #cg1*Gender +
+          #cc1*country + 
+          #d1under3_1 
+ 
+# Tool 2          
+# direct effect
+BehInt2 ~ PerfExp2 + 
+          SocInf2 +
+          trust2 + 
+          soctechblind +
+          knowAI7_1 + 
+          Age +
+          country 
+          #EffExp2 + 
+          #jobanx +  
+          #knowAI4_1 + 
+          #Gender +
+          #cogread 
+          #d2under3_1 
+'
+fit.reg2 = sem(model2,data = comp_df,fixed.x = T)
+summary(fit.reg2, fit = T)
+```
+
+### RegSEM mediation model
+
+# Appendix
+
+## Model 
+
+```{r}
+#| eval: false
+library(sem)
+#| echo: true
+multipleMediation <- '
+effort =~ e1 + e2 + e3
+perform =~ p1 + p2 + p3
+intent =~ i1 + i2 + i3
+learn =~ l1 + l2 + l3
+
+intent ~ b1 * perform + b2 * effort + c * learn
+perform ~ a1 * learn
+effort ~ a2 * learn
+
+indirect1 := a1 * b1
+indirect2 := a2 * b2
+
+total := c + (a1 * b1) + (a2 * b2)
+perform ~~ effort
+'
+fit <- sem(model = multipleMediation, data = Data)
+summary(fit)
+```
+
+## RegSEM
+
+```{r}
+#| eval: false
+library(ISLR)
+library(regsem) # we recommend using version 0.50 or later
+data(College)
+#select only public schools
+College1 = College[which(College$Private == "No"),]
+#select and standardize variables of interest
+Data = data.frame(scale(College1[c(3,4,9:12,15,17)]))
+#lavaan model with all mediators
+model1 <-
+' # direct effect (c_prime)
+Enroll ~ c_prime*Accept
+# mediators
+#a paths
+Outstate ~ a1*Accept
+Room.Board ~ a2*Accept
+Books ~ a3*Accept
+Personal ~ a4*Accept
+S.F.Ratio ~ a5*Accept
+Expend ~ a6*Accept
+#b paths
+Enroll ~ b1*Outstate + b2*Room.Board + b3*Books +
+b4*Personal + b5*S.F.Ratio + b6*Expend
+# indirect effects (a*b)
+a1b1: = a1*b1
+a2b2: = a2*b2
+a3b3: = a3*b3
+a4b4: = a4*b4
+a5b5: = a5*b5
+a6b6: = a6*b6
+#total effect (c)
+c := c_prime + (a1*b1) + (a2*b2) + (a3*b3) + (a4*b4) +
+(a5*b5) + (a6*b6)
+'
+fit.delta = sem(model1,data = Data,fixed.x = T)
+#identify parameter numbers to penalize with pars_pen
+extractMatrices(fit.delta)$A
+#exploratory mediation analysis via regularization
+#Stage 1
+#find tuning parameter
+fit.reg.tune = cv_regsem(model = fit.delta,type = "enet",
+pars_pen = c(2:13),fit.ret = "BIC",n.lambda = 120,lambda.start = 0,jump = 0.005)
+
+
+fit.reg.tune
+#find minimum BIC value and associated lambda value
+bics = fit.reg.tune[[2]][,"BIC"]
+# remove the one that did not converge
+bics<- bics[bics >= 0]  
+
+plot(seq(0,0.590,by = 0.005),bics,main = "BIC by lambda",
+xlab = "lambda",ylab = "BIC")
+
+min.bic = min(bics)
+lambda = fit.reg.tune[[2]][which(bics == min.bic),"lambda"]
+#fit model with selected value of lambda
+fit.reg1 = multi_optim(fit.delta,type = "lasso", pars_pen = c(2:13),lambda = lambda,gradFun = "ram",
+optMethod = "coord_desc")
+
+summary(fit.reg1)
+#display specific indirect effects
+fit.reg1$mediation
+#Stage 2
+#refit model with only selected mediators
+model2 <-
+' # direct effect (c_prime)
+Enroll ~ c_prime*Accept
+# mediators
+Room.Board ~ a2*Accept
+Personal ~ a4*Accept
+Expend ~ a6*Accept
+Enroll ~ b2*Room.Board + b4*Personal + b6*Expend
+# indirect effects (a*b)
+a2b2: = a2*b2
+a4b4: = a4*b4
+a6b6: = a6*b6
+#total effect (c)
+c := c_prime + (a2*b2) + (a4*b4) + (a6*b6)
+'
+fit.reg2 = sem(model2,data = Data,fixed.x = T)
+summary(fit.reg2)
+```
+
+
+## Discussion 
+
+HERE STH ON WHY UTAUT AND NOT OTHER THEORIES:
+
+- because social influence is included and may be relevant among students 
+- we address the criticism of the UTAUT [@shachak_etal19]:
+
+1. Value adding use is often neglected in UTAUT research [@shachak_etal19]; we do not focus on how the AI tool is used in practice. BUT: the prerequisite for value adding use is acceptance and openness towards a technology; by investigating the hypotheses in a student sample and focusing on the intention to use the tool in their future jobs, we shed light on the processes that enable value adding use
+
+2. Adopt and develop theoretical frameworks and methodologies that account for multiple, interrelated, sociotechnical aspects [@shachak_etal19]: Because students are not yet operating in an organizational context, influencing factors are limited to their social contexts and the educational setting; accordingly, our research allows a stronger focus on the individual predictors of the intention to use the tool; without confounding by organizational setting, work tasks, and habits 
+
+3. same applied to "Accounting for health system complexity" [@shachak_etal19]
+
+4. Understanding and reconciling multiple user needs [@shachak_etal19]: We selected a relatively homogenous sample of psychology master's students - reconciliation of multiple user needs does not play a major role 
+
+5. Consider temporal dimensions of HIT implementation [@shachak_etal19]: We do not focus on an implementation setting, but on general openness towards using the tool. 
+\newpage
+
+# References
+
+::: {#refs custom-style="Bibliography"}
+:::
