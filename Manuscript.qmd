@@ -1,0 +1,985 @@
+---
+title: "Attitudes Toward the Adoption of two AI-Enabled Mental Health Tools Among Prospective Psychotherapists: A Cross-Sectional Study"
+bibliography: "../../config/AI_Attitudes.bib"
+csl: "../../config/journal-of-medical-internet-research.csl"
+execute:
+  echo: false
+  warning: false
+  message: false
+  cache: true
+  include: false
+prefer-html: true
+author: "Anne-Kathrin Kleine, Eesha Kokje, Eva Lermer, & Susanne Gaube"
+format: 
+  docx:
+    reference-doc: "../../config/template_JMIR.docx"
+  html:
+    toc: true
+    toc-depth: 3
+---
+
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+```
+
+# Abstract 
+
+**Background**: An investigation of individual-level predictors of the intention to use an AI-enabled feedback and a treatment recommendation tool in mental healthcare.\
+
+**Objective**: Using an extended UTAUT model to gain insight into the predictors of technology usage intentions for two specific AI-enabled mental healthcare tools.\
+
+**Methods**: A cross-sectional study included 206 psychology students and psychotherapists-in-training to examine the predictors of their intention to use two AI-enabled mental healthcare tools. The first tool provides feedback to the psychotherapist on their adherence to motivational interviewing techniques. The second tool uses patient voice samples to derive mood scores that the therapist may use for treatment decisions. Participants were presented with graphic depictions of the tools’ functioning mechanisms before measuring the variables of an extended UTAUT. Two structural equation models (one for each tool) were specified that included direct and mediated paths predicting tool usage intentions.\
+
+**Results**: Perceived usefulness (PU) and social influence (SI) had a positive effect on the intention to use the feedback tool (*P* < .001) and the treatment recommendation tool (PU: *P* = .014 and SI: *P* < .001). However, trust was unrelated to usage intention for both tools. Moreover, perceived ease of use was unrelated (feedback tool) and even negatively related (treatment recommendation tool) to usage intentions when considering all predictors (*P* = .004). In addition, a positive relationship of cognitive technology readiness (*P* = .019) with the intention to use the feedback tool and a negative relationship of AI anxiety with the intention to use the feedback tool (*P* = .001) and the treatment recommendation tool (*P* < .001) were observed.\
+
+**Conclusions**: The results shed light on general and tool-dependent drivers of AI technology adoption in mental healthcare. Future research may explore technological and user group characteristics that influence the adoption of AI-enabled tools in mental healthcare.\
+
+**Keywords**: artificial intelligence; mental health; clinical decision support systems; unified theory of acceptance and use of technology; technology acceptance model \
+
+**Pre-registration statement**: The hypotheses were pre-registered on the Open Science Framework ([osf.io/fqdzb](https://osf.io/fqdzb)). Exploratory hypotheses are identified as such. 
+
+# Introduction
+
+In spite of the growing efforts to create user-friendly artificial intelligence (AI) applications, their utilization in clinical care remains limited [@sendak_etal20]. Barriers to the adoption of AI-enabled clinical decision support systems (AI-CDSSs) can be found at the individual (e.g., end user’s lack of trust in the system), organizational (e.g., capacity to innovate), and system (e.g., political decisions) level [@greenhalgh_etal17; @yusof_etal08; @garvey_etal22a]. Often, the adoption of AI-CDSSs fails because system and organizational requirements are not met, and, accordingly, tools do not become available to potential end users [@shachak_etal19]. The lack of regulatory oversight and standardization of AI-CDSSs can create uncertainty in the field, potentially leading to liability issues at the organizational and system levels [@shachak_etal19]. If the system and corporate requirements for implementing a given technology are satisfied, their successful deployment depends upon the practitioner’s willingness to use them. However, clinicians may be skeptical about using AI-CDSSs due to concerns about the accuracy and reliability of the AI-generated decisions. Several frameworks and theories have been developed to systematically study the mechanisms influencing the implementation of technology in practice [@shachak_etal19; @hsiao_chen16; @kumar_etal23; @wiljer_etal21; @camacho_etal20]. The two most relevant models for individual-level predictors are the Technology Acceptance Model [TAM, @davis89] and the Unified Theory of Acceptance and Use of Technology [UTAUT, @venkatesh22, @venkatesh_etal03, @venkatesh_etal16a]. The TAM aims to explain why a given technology is rejected or accepted by the end user. It proposes that system use is centrally driven by its perceived usefulness and ease of use. Both beliefs are determinants for attitudes towards use, which, in turn, influence use behavior [@davis89]. The UTAUT combines the principles of eight technology acceptance models, including the TAM. In addition to perceived usefulness (i.e., performance expectancy) and perceived ease of use (i.e., effort expectancy), it considers social processes (i.e., social influence) and demographic variables (i.e., age, gender) as predictors of usage intention [@venkatesh22, @venkatesh_etal03, @venkatesh_etal16a]. Accordingly, we focus on the UTAUT as the most holistic use prediction model.\
+
+Several studies have already demonstrated the applicability of UTAUT in investigating AI-CDSSs implementation [@arfi_etal21; @fan_etal20; @lin_etal21d; @zhai_etal21; @tran_etal21e; @gado_etal22]. But only one study has thus far examined the predictors of the intention to use AI-enabled tools in mental health care [@gado_etal22]. The authors asked psychology students about their general knowledge and attitudes toward AI systems. The results suggest a link between the perceived social norms, perceived ease of use, perceived usefulness, and perceived knowledge with students’ intention to use AI-enabled tools. However, prospective and current mental health practitioners may have varying levels of skepticism about implementing AI technology for different purposes in their (future) practice. For example, when presented with AI-generated feedback regarding diagnostic or treatment decisions, they may be reluctant to accept AI-based recommendations because of the far-reaching consequences of erroneous predictions or because they feel undermined in their role as therapists. At the same time, they may be open to incorporating AI-generated feedback regarding their interviewing techniques. Although research has begun to examine practitioners’ acceptance of AI-enabled tools in mental healthcare, there is a lack of specificity in assessing usage intention, limiting the utility of these findings in informing practice. The current study seeks to address this gap by examining the intention to use two specific AI-enabled mental health tools, namely a) a psychotherapy feedback tool that analyzes data from therapist-patient conversations and provides performance-specific feedback for the therapist [@cummins_etal19; @hirsch_etal18; @tanana_etal19; @imel_etal19] and b) a treatment recommendation tool that uses voice recordings and mood scores to generate recommendations for psychotherapeutic support [@huang_etal18].
+
+
+```{r}
+#| include: true
+#| label: fig-model
+#| fig-cap: The research model without control variables. The model is adapted from the pre-usage part of the model presented in Venkatesh et al. (2011). In the current study, we extended the original model by adding tool understanding and cognitive technology readiness as predictors of perceived usefulness, perceived ease of use, and trust. 
+
+library(tiff)
+library(grid)
+grid.raster(readTIFF("Figures/model.tiff"))
+```
+
+## The AI-Enabled Feedback Tool
+
+Providing supervision and performance feedback on psychotherapy sessions enhances trainees’ and therapists’ skills acquisition and retention [@tanana_etal19; @helgeronnestad_ladany06]. However, these processes are labor and cost intensive and thus rarely used in training and clinical practice. Often, feedback is based on trainees’ self-reports and is only available long after the therapy session has concluded [@tanana_etal19]. AI technology may help reduce this problem by providing continuous, immediate, and performance-specific feedback to psychotherapists and trainees. Over the past years, several AI-enabled feedback tools have been developed and are already used in practice [e.g., @ieso]. For example, _TIM_ (Therapy Insights Model) uses real-time chat messages exchanged between therapists and patients to provide feedback on topics covered in the session and generate recommendations regarding topics that should be addressed in the following session [@cummins_etal19]. _CORE-MI_ (Counselor Observer Ratings Expert for Motivational Interviewing) uses audio recordings of motivational interviewing (MI). sessions to generate feedback on psychotherapists' adherence to MI principles. The generated feedback focuses on six aspects of MI fidelity: empathy, MI spirit, reflection-to-question ratio, percent open questions, percent complex reflections, and percent MI adherence [@hirsch_etal18]. The tool chosen for the current study was developed based on _CORE-MI_. Participants are presented with information on how speech data recorded during a psychotherapy session is processed and analyzed using machine learning (ML) models to generate feedback for psychotherapists regarding their adherence to MI principles and possibilities for improvement, as shown in @fig-feedback.
+
+
+```{r}
+#| include: true
+#| label: fig-feedback
+#| fig-cap: The output slide of the AI-enabled feedback tool showing a visual summary of the AI-generated recommendations regarding the adherence of motivational interviewing principles
+library(grid)
+grid.raster(readTIFF("Figures/feedback.tiff"))
+```
+
+## The AI-Enabled Treatment Recommendation Tool
+
+Timely psychotherapeutic support may lower the risk of worsening depressive symptoms and suicidality [@calati_courtet16]. Multiple studies have demonstrated the effectiveness of AI-enabled emotion analysis in assessing patients’ depressive states and recommending timely intervention, thereby improving mental healthcare [@jan_etal18; @huang_etal18]. In particular, systems have been developed over the past years that monitor or evaluate the mood of individuals with mental disorders, such as major depressive or bipolar disorder, using speech data [@karam_etal14; @huang_etal20i]. These tools usually require the patient to record voice samples on their mobile phone, which are analyzed by an automated speech data classifier to assess their current mood [@karam_etal14]. Mental health practitioners can then use the information to decide whether urgent intervention is needed [@sokero_etal05]. The treatment recommendation tool chosen for the current study is based on the system developed by *SondeHealth* [@Sonde]. Specifically, participants are presented with information on how voice data recorded on a mobile device is processed and analyzed to generate a mood score that may be used for treatment-related decisions, as shown in @fig-depression. 
+
+```{r}
+#| include: true
+#| label: fig-depression
+#| fig-cap: The output slide of the AI-enabled treatment recommendation tool showing a visual summary of the AI-generated mood scores for two patients.
+library(grid)
+grid.raster(readTIFF("Figures/depression.tiff"))
+```
+
+
+## Research Model and Hypotheses
+
+The first goal of the current study is to test the applicability of a modified version of the UTAUT in the mental health context to understand the factors that influence the intention to use two specific AI-enabled mental healthcare tools [@gado_etal22; @venkatesh22; @venkatesh_etal03; @venkatesh_etal16a]. In line with the UTAUT, we propose tool-specific perceived usefulness (i.e., the degree to which an individual believes that using a system will enhance their performance) and perceived ease of use (i.e., the degree of ease associated with using the technology) to predict the behavioral intention to use the tools in their future work. The hypotheses for this research have been pre-registered through the open science framework ([osf.io/fqdzb](https://osf.io/fqdzb)). \
+
+*Hypothesis 1*: There is a positive relationship between perceived usefulness and the intention to use the tools in psychotherapy. \
+
+*Hypothesis 2*: There is a positive relationship between perceived ease of use and the intention to use the tools in psychotherapy. \
+
+Unlike experienced psychotherapists, psychology students and psychotherapists-in-training may be less likely to be influenced by established work habits or procedures, which could impede the adoption of new AI technologies [@venkatesh_etal16a]. However, it has been suggested that students are more likely to be affected by their peers and the values and standards of their potential future employers [@owusu_etal22]. As a result, we propose that the UTAUT variable, ‘social influence’ (i.e., the perception that other significant people think the system should be used), should be considered a predictor of students’ intention to use the tools.\
+
+
+*Hypothesis 3*: There is a positive relationship between social influence and the intention to use the tools in psychotherapy. \
+
+It has been suggested that trust may be a relevant predictor of the intention to use a technology if the risk associated with it is high [@arfi_etal21]. Due to the sensitive nature of the recommendations made by the two tools, we hypothesize that trust may be a predictor of students’ intention to use the tools.\
+
+*Hypothesis 4*: There is a positive relationship between trust in the tools and the intention to use them in psychotherapy. \
+
+A lack of understanding of the underlying mechanisms of AI-enabled tools in mental healthcare has led to skepticism of their use [@aafjes-vandoorn_etal21; @chekroud_etal21]. In particular, the lack of transparency and explainability of AI-based clinical decision-making has impeded the adoption of such tools in mental healthcare [@aafjes-vandoorn_etal21; @chekroud_etal21; @kelly_etal19]. Building on the New Framework for Theorizing and Evaluating Nonadoption, Abandonment, and Challenges to the Scale-Up, Spread, and Sustainability of Health and Care Technologies [NASSS, @greenhalgh_etal17], we propose that knowledge regarding the technology is a predictor of its perceived value. Consequently, we suggest that students with the knowledge and skills to apply the tools and understand how the recommendations are derived are more likely to perceive them as useful [@seufert_etal21; @gado_etal22]. To test this, we extend the UTAUT by including cognitive technology readiness as an indicator of general AI knowledge and understanding of the tool as an indicator of specific AI knowledge as predictors of perceived usefulness, perceived ease of use, and trust. We pre-registered two research questions to test this relationship.\
+
+*Research Question 1*: Is the positive relationship between cognitive technology readiness and the intention to use the tools mediated through a) perceived usefulness, b) perceived ease of use, and c) trust in the tools? \
+
+*Research Question 2*: Is the positive relationship between understanding of the tools and the intention to use the tools mediated through a) perceived usefulness, b) perceived ease of use, and c) trust in the tools? 
+
+
+# Methods
+
+```{r read_data}
+## Read in data
+library("readxl")
+library(tidyverse)
+data <- read_excel("Data/Data.xlsx", col_names = T) 
+source("R/custom-functions.R")
+library(gtools)
+```
+
+##  Participants
+
+Psychology students and psychotherapists-in-training were recruited online through social media postings, email correspondence with administrative offices of universities, and psychotherapy training centers, as well as through the professional research-focused panel company, Prolific. Data was collected between October 2022 and January 2023, resulting in a total of 362 participants beginning the questionnaire. Of those, 208 provided answers on the behavioral intention to use the tools, resulting in a 42.54% dropout rate. In addition, 2 participants failed at least two of the four attention check items [@Oppenheimer2009], leaving us with a final sample size of 206. \
+
+```{r}
+#| include: false
+
+# Gender distribution
+male <- unname(table(data$Gender)[1])
+male_per <- round(unname(prop.table(table(data$Gender))[1])*100,1)
+
+female <- unname(table(data$Gender)[2])
+female_per <- round(unname(prop.table(table(data$Gender))[2])*100,1)
+
+non <- unname(table(data$Gender)[3])
+non_per <- round(unname(prop.table(table(data$Gender))[3])*100,1)
+
+# Age distribution
+data$Age <- as.numeric(data$Age)
+
+
+# Study country distribution
+data$country <- as.numeric(data$country)
+
+data[data$country == 3, ]$country_3_TEXT
+
+data$country[data$country_3_TEXT == "Austria"] <- 1
+
+data$country[data$country_3_TEXT == "USA and UK"] <- 2
+
+data$country[data$country_3_TEXT == "UK"] <- 4
+data$country[data$country_3_TEXT == "England"] <- 4
+data$country[data$country_3_TEXT == "Uk"] <- 4
+data$country[data$country_3_TEXT == "United Kingdom"] <- 4
+data$country[data$country_3_TEXT == "UK - England"] <- 4
+data$country[data$country_3_TEXT == "uk"] <- 4
+data$country[data$country_3_TEXT == "Scotland and Netherlands"] <- 4
+data$country[data$country_3_TEXT == "United Kingdom (England)"] <- 4
+
+data$country[data$country_3_TEXT == "Canada"] <- 5
+
+table(data$country)
+
+germany <- unname(table(data$country)[1])
+germany_per <- round(unname(prop.table(table(data$country))[1])*100,1)
+
+uk <- unname(table(data$country)[4])
+uk_per <- round(unname(prop.table(table(data$country))[4])*100,1)
+
+
+us <- unname(table(data$country)[2])
+us_per <- round(unname(prop.table(table(data$country))[2])*100,1)
+
+
+canada <- unname(table(data$country)[5])
+canada_per <- round(unname(prop.table(table(data$country))[5])*100,1)
+
+othercoun <- unname(table(data$country)[3])
+othercoun_per <- round(unname(prop.table(table(data$country))[3])*100,1)
+
+# masters focus
+data$masters <- as.numeric(data$masters)
+table(data$masters, useNA = "always")
+
+clinical <- unname(table(data$masters)[2])
+clinical_per <- round(unname(prop.table(table(data$masters))[2])*100,1)
+
+general <- unname(table(data$masters)[1])
+general_per <- round(unname(prop.table(table(data$masters))[1])*100,1)
+
+other <- unname(table(data$masters)[2])
+other_per <- round(unname(prop.table(table(data$masters))[2])*100,1)
+
+notav <- unname(table(data$masters)[3])
+notav_per <- round(unname(prop.table(table(data$masters))[3])*100,1)
+
+data$countryger[data$country == 1] = 1
+data$countryger[data$country != 1] = 0
+```
+
+The final sample consisted of `r male` (`r male_per`%) males, `r female` (`r female_per`%) females, and `r non` (`r non_per`%) non-binary participants. The age of the participants ranged from `r range(data$Age)[1]` to `r range(data$Age)[2]` years (*M* = `r round(mean(data$Age),2)`, *SD* = `r round(sd(data$Age),2)`). Data were collected in Germany, the USA, the UK, and Canada. Most participants studied in Germany (`r germany`,  `r germany_per`%), followed by the UK (`r uk`, `r uk_per`%), the USA (`r us`, `r us_per`%), Canada (`r canada`, `r canada_per`%), and other countries (`r othercoun`, `r othercoun_per`%). Regarding the field of study, the majority of participants stated that their studies focused on clinical psychology (`r clinical`, `r clinical_per`%), followed by those studying psychology with no specific focus (`r general`, `r general_per`%), and those who did not provide this information (`r notav`, `r notav_per`%).
+
+
+```{r}
+#| include: false
+## Rename and recode
+## rename
+data_all <- data
+names(data_all) <- gsub("d2priv", "dapriv2", names(data_all))
+  
+data_num <- data_all %>% 
+  select(-matches("Prolific_ID|knowAI3|knowAI6|under4|country|masters_3_TEXT|degree|email|Date|IBA|Progress|Duration|Finished|ResponseI|Recipient|Reference|LocationLat|LocationLon|Channel|UserL|consent")) %>%
+  mutate_if(is.character, as.numeric)
+
+
+data_char <- data_all %>% 
+  select(matches("Prolific_ID|knowAI3|knowAI6|under4|country|masters_3_TEXT|degree|email"))
+
+data_all <- cbind(data_num, data_char)
+
+data_all %>% filter_at(vars(d1under1,d1under2),all_vars(is.na(.)))
+
+## create lack of understanding variable
+data_all <- data_all %>% 
+   mutate(lackunder1 = 
+            case_when(
+              d1under1 == 1 | d1under2 == 1 ~ 1,
+              d1under1 == 2 | d1under2 == 2 ~ 2))
+
+
+summary(data_all)
+
+## recode
+recode_5 <- function(x) {               
+  x * (-1)+6
+}
+recode_8 <- function(x) {               
+  x * (-1)+9
+}
+
+data_recode_5 <- apply(select(data_all, matches("gattAI1_3|gattAI1_6|gattAI1_8|gattAI1_9|gattAI1_10|gattAI2_5|gattAI2_9|gattAI2_10")), 2, recode_5)   
+
+data_all[ , colnames(data_all) %in% colnames(data_recode_5)] <- data_recode_5
+
+data_recode_8 <- apply(select(data_all, matches("dapriv1_4|dapriv1_6|dapriv1_7|dapriv2_4|dapriv2_5|dapriv2_6")), 2, recode_8)   
+
+data_all[ , colnames(data_all) %in% colnames(data_recode_8)] <- data_recode_8
+
+# recode Anxiety 1
+data_all <- data_all %>% mutate(across(matches("anxty1"), ~ .x-5))
+
+# recode dunder3_1
+data_all <- data_all %>% mutate(across(matches("d.under3_1"), ~ .x-10))
+
+```
+
+```{r}
+#| include: false
+## Make composite data frame
+library(sjlabelled)
+
+data_comp <- data_all %>% select(matches("gatt|cog_read_3|cog_read_4|cog_read_5|vision|ethic|anxty._2|anxty._3|anxty._4|techblind|PerfExp|EffExp|SocInf|FacCond|attitude|Beh_Int|anxty|self_eff|dapriv._1|dapriv._2|dapriv._3|trust")) %>% mutate_if(is.character, as.numeric)
+
+
+demos <- data_all %>% select(matches("under1|under2|under3|knowAI1|knowAI2|knowAI4|knowAI5|knowAI7|^Age$|Gender|^country$|commitment")) %>%  mutate_if(is.character, as.numeric)
+text_data <- data_all %>% select(matches("country_3_TEXT|uni|master|degree|knowAI3|knowAI6|under4|invite_raffle|invite_follow|email"))
+
+names(data_comp) <- gsub("_read", "read", names(data_comp))
+names(data_comp) <- gsub("_anx", "anx", names(data_comp))
+names(data_comp) <- gsub("Beh_Int", "BehInt", names(data_comp))
+names(data_comp) <- gsub("self_eff", "selfeff", names(data_comp))
+
+
+comp_split <- data_comp %>% remove_all_labels(.) %>%
+  split.default(sub("_.*", "", names(data_comp)))
+
+comp <- purrr::map(comp_split, ~ rowMeans(.x, na.rm=T))
+alph <- purrr::map(comp_split, ~ psych::alpha(.x), data = .x) %>%
+  purrr::map(~ .x$total)
+
+comp_df <- do.call("cbind", comp) %>% as.data.frame(.) %>%  cbind(., demos) %>% remove_all_labels(.)
+alph_df <- do.call("rbind", alph) %>% round(., 2)
+```
+
+## Procedure
+
+The online survey was anonymous and self-administered. All participants provided informed consent before participating. The Institutional Review Board Committee of the University of Regensburg approved the study protocol (Protocol Number: 22-3096-101). In the online survey, we first assessed cognitive technology readiness. Next, participants were presented with slides that explained how recommendations for the AI-enabled feedback tool (henceforth, *FB Tool*) and the treatment recommendation tool (henceforth, *TR Tool*) were generated (the material is available from the first author upon request). Before seeing the slides, participants read the following short introduction: "On the following page, you will be presented with a tool that is used to [*FB Tool*: provide feedback to psychotherapists about what went well and what could be improved in their sessions; *TR Tool*: generate a mood score to rate the severity of patients' depression. The mood score may be used by psychotherapists to decide which patient to treat first if multiple patients seek treatment and there is limited capacity]. Please read the information carefully and try to understand what the tool does and how it may be used in psychotherapy practice/ training. After the presentation, you will be asked a couple of questions about the tool." After each tool presentation, the UTAUT predictor variables (i.e., perceived usefulness, perceived ease of use, social influence, and trust), the understanding of the tool, and the intention to use the respective tool were assessed. Finally, we asked for demographic information.
+
+
+## Measurement Instruments 
+
+### Independent Variables 
+
+```{r}
+## Reliabilities
+rel_tab <- alph_df %>%
+DT::datatable(
+    extensions = 'Buttons', 
+    options = list(dom = 'Bfrtip', 
+                   buttons = c('excel', "csv"),
+                   pageLength = 20))
+
+library(psych)
+library(GPArotation)
+
+# general knowledge
+alpha_cogread <- alph_df["cogread", 1]
+omega_cogread <- round(omega(data_all %>% select(matches("cog_read")), 1)$omega.tot, 2)
+
+# FB Tool
+alpha_beh1 <- alph_df["BehInt1", 1]
+omega_beh1 <- round(omega(data_all %>% select(matches("Beh_Int1")), 1)$omega.tot, 2)
+
+alpha_perf1 <- alph_df["PerfExp1", 1]
+omega_perf1 <- round(omega(data_all %>% select(matches("PerfExp1")))$omega.tot,2)
+
+alpha_eff1 <- alph_df["EffExp1", 1]
+omega_eff1 <- round(omega(data_all %>% select(matches("EffExp1")))$omega.tot,2)
+
+alpha_soc1 <- alph_df["SocInf1", 1]
+omega_soc1 <- round(omega(data_all %>% select(matches("SocInf1")))$omega.tot,2)
+
+alpha_tru1 <- alph_df["trust1", 1]
+omega_tru1 <- round(omega(data_all %>% select(matches("trust1")))$omega.tot,2)
+
+alpha_dapriv1 <- alph_df["dapriv1", 1]
+omega_dapriv1 <- round(omega(data_all %>% select(matches("dapriv1")))$omega.tot,2)
+
+alpha_anxty1 <- alph_df["anxty1", 1]
+omega_anxty1 <- round(omega(data_all %>% select(matches("anxty1")))$omega.tot,2)
+
+# TR Tool
+alpha_beh2 <- alph_df["BehInt2", 1]
+omega_beh2 <- round(omega(data_all %>% select(matches("Beh_Int2")), 1)$omega.tot, 2)
+
+alpha_perf2 <- alph_df["PerfExp2", 1]
+omega_perf2 <- round(omega(data_all %>% select(matches("PerfExp2")))$omega.tot,2)
+
+alpha_eff2 <- alph_df["EffExp2", 1]
+omega_eff2 <- round(omega(data_all %>% select(matches("EffExp2")))$omega.tot,2)
+
+alpha_soc2 <- alph_df["SocInf2", 1]
+omega_soc2 <- round(omega(data_all %>% select(matches("SocInf2")))$omega.tot,2)
+
+alpha_tru2 <- alph_df["trust2", 1]
+omega_tru2 <- round(omega(data_all %>% select(matches("trust2")))$omega.tot,2)
+
+alpha_dapriv2 <- alph_df["dapriv2", 1]
+omega_dapriv2 <- round(omega(data_all %>% select(matches("dapriv2")))$omega.tot,2)
+
+alpha_anxty2 <- alph_df["anxty2", 1]
+omega_anxty2 <- round(omega(data_all %>% select(matches("anxty2")))$omega.tot,2)
+```
+
+We assessed cognitive technology readiness with five items of the cognition factor of the medical artificial intelligence readiness (MAIRS) scale [@karaca_etal21]. The scale measures terminological knowledge about medical artificial intelligence applications. Two items with factor loadings < .40 [e.g., @dimitrova20] that did not relate to a general understanding of AI (i.e., "I can define the basic concepts of data science", "I can define the basic concepts of statistics") were removed. We kept three items that relate to AI understanding (i.e., "I can explain how AI systems are trained", "I can define the basic concepts and terminology of AI", "I can properly analyze the data obtained by AI in healthcare"; $\alpha$ = `r alpha_cogread`, $\omega$ = `r omega_cogread`). \
+
+Perceived usefulness, perceived ease of use, and social influence were measured with items adapted from @venkatesh_etal03. Participants rated their agreement on a five-point Likert scale ranging from 1 = *Strongly disagree* to 5 = *Strongly agree*. Perceived usefulness was assessed with five items (e.g., "Using the AI tool would enable me to accomplish tasks more quickly"). Reliabilities are $\alpha_{FBTool}$ = `r alpha_perf1` and $\omega_{FBTool}$ = `r omega_perf1` for the first tool and $\alpha_{TRTool}$ = `r alpha_perf2` and $\omega_{TRTool}$ = `r omega_perf2` for the second tool. Perceived ease of use was measured with four items (e.g., "My interaction with the AI tool will be clear and understandable"; $\alpha_{FBTool}$ = `r alpha_eff1`, $\omega_{FBTool}$ = `r omega_eff1`; $\alpha_{TRTool}$ = `r alpha_eff2`, $\omega_{TRTool}$ = `r omega_eff2`). Social influence was measured with five items (e.g., "In my future job as a psychotherapist, people who are important to me will think that I should use the AI tool"; $\alpha_{FBTool}$ = `r alpha_soc1`, $\omega_{FBTool}$ = `r omega_soc1`; $\alpha_{TRTool}$ = `r alpha_soc2`, $\omega_{TRTool}$ = `r omega_soc2`). Trust was measured with three items adapted from @venkatesh_etal11 (e.g., "The AI tool will provide access to sincere and genuine feedback"; $\alpha_{FBTool}$ = `r alpha_tru1`, $\omega_{FBTool}$ = `r omega_tru1`; $\alpha_{TRTool}$ = `r alpha_tru2`, $\omega_{TRTool}$ = `r omega_tru2`). 
+Finally, understanding of the AI-enabled tools was assessed with a single item ("Please rate your understanding of the AI-enabled feedback tool"), with answers ranging from 1 = *I don't understand the tool at all* to 6 = *I understand the tool extremely well*.
+
+### The Behavioral Intention to Use the Tools as the Dependent Variable
+
+The behavioral intention to use the tools was measured on a five-point Likert scale ranging from 1 = *Strongly disagree* to 5 = *Strongly agree* with three items adapted from @venkatesh_etal03 (e.g., "I intend to use the AI tool in my future job as a psychotherapist"; $\alpha_{FBTool}$ = `r alpha_beh1`, $\omega_{FBTool}$ = `r omega_beh1`; $\alpha_{TRTool}$ = `r alpha_beh2`, $\omega_{TRTool}$ = `r omega_beh2`).
+
+### Control Variables
+
+Data privacy concerns and AI anxiety (i.e., fears and insecurity regarding AI technology) have repeatedly been identified as negative predictors of the intention to use AI technology [@mishra_etal21, @chai_etal20]. In addition, it has been shown that males have more positive attitudes toward AI technologies than females  [@fietta_etal22]. Finally, some evidence exists for associations of AI acceptance with age [@liang_lee17] and country [@sindermann_etal21]. Accordingly, data privacy and security concerns [@brady_etal21] ($\alpha_{FBTool}$ = `r alpha_dapriv1`, $\omega_{FBTool}$ = `r omega_dapriv1`; $\alpha_{TRTool}$ = `r alpha_dapriv2`, $\omega_{TRTool}$ = `r omega_dapriv2`; e.g., "I would be concerned that the AI tool would share my personal information with third-parties"), AI anxiety [@venkatesh_etal03] ($\alpha_{FBTool}$ = `r alpha_anxty1`, $\omega_{FBTool}$ = `r omega_anxty1`; $\alpha_{TRTool}$ = `r alpha_anxty2`, $\omega_{TRTool}$ = `r omega_anxty2`; e.g., "I feel apprehensive about using the AI tool"), gender (0 = male, 1 = not male), age, and study country (1 = Germany, 0 = English-speaking countries) were included as control variables. One item of the AI anxiety and three items of the data privacy scales with standardized factor loadings < .40 were excluded [e.g., @dimitrova20]. 
+
+## Data Analysis
+
+The data was analyzed using *R* [version 4.2.2, @rcoreteam22]. First, we calculated descriptive statistic summaries, including mean values, standard deviations, and correlations between study variables for each tool. Second, a confirmatory factor analysis (CFA) with perceived usefulness, perceived ease of use, social influence, trust, cognitive readiness, specific tool understanding, the behavioral intention to use the tool, AI anxiety, and data privacy concerns was conducted using the *lavaan* package [@rosseel12]. We assumed at least reasonable fit for models with comparative fit index (CFI) and Tucker Lewis index (TLI) values close to or exceeding .90 [@Hu1999]. Root-mean-square error of approximation (RMSEA) values smaller than .08 are considered acceptable [@Browne1992]. Finally, standardized root-mean-square residual (SRMR) values up to .08 are considered satisfactory [@Hu1999]. We compared the theoretical measurement model with three more parsimonious models (combining cognitive readiness and tool understanding; perceived usefulness and ease of use; AI anxiety and data privacy concerns) to assess whether the model variables are sufficiently distinct. Third, we conducted structural equation modeling (SEM) using the *lavaan* package [@rosseel12] to examine the relationships between the predictor variables and the intention to use the tools to answer *Hypotheses 1* through *4* and *Research Questions 1* and *2*. We specified two models (one for each tool) with direct effects and the mediation of the relationship between specific tool understanding, cognitive AI readiness, and the intention to use the tool. We followed the recommendations by @scharf_etal21 to decide whether the regression coefficients should be regularized. Specifically, we applied regularization in case of multicollinearity and associated inflated standard errors [@scharf_etal21]. The study data and R script will be made available online upon publication: <https://osf.io/fqdzb>
+
+# Results
+
+```{r}
+#| include: false
+## Correlations
+# select only numeric 
+comp_df_mum <- comp_df[ , purrr::map_lgl(comp_df, is.numeric)]
+
+comp_df$countryger[comp_df$country == 1] <- 1
+comp_df$countryger[comp_df$country != 1] <- 0
+
+comp_df <- comp_df %>% relocate(PerfExp1, PerfExp2, EffExp1, EffExp2, SocInf1, SocInf2, trust1, trust2, d1under3_1, d2under3_1, BehInt1, BehInt2, dapriv1, dapriv2, anxty1, anxty2, cogread, Age, Gender, countryger)
+
+# recode Gender variable 
+comp_df <- comp_df %>% mutate(Gender=recode(Gender, 
+                         `1`= 0,
+                         `2`= 1,
+                         `3` = 1))
+
+data_all <- data_all %>% mutate(Gender=recode(Gender, 
+                         `1`= 0,
+                         `2`= 1,
+                         `3` = 1))
+
+comp_df2 <- comp_df
+
+names(comp_df) <- gsub("PerfExp1", "Perceived usefulness", names(comp_df))
+names(comp_df) <- gsub("EffExp1", "Perceived ease of use", names(comp_df))
+names(comp_df) <- gsub("anxty1", "Anxiety", names(comp_df))
+names(comp_df) <- gsub("cogread", "Cognitive readiness", names(comp_df))
+names(comp_df) <- gsub("dapriv1", "Privacy concerns", names(comp_df))
+names(comp_df) <- gsub("SocInf1", "Social influence", names(comp_df))
+names(comp_df) <- gsub("trust1", "Trust", names(comp_df))
+names(comp_df) <- gsub("BehInt1", "Behavioral intention", names(comp_df))
+names(comp_df) <- gsub("d1under3_1", "Tool understanding", names(comp_df))
+names(comp_df) <- gsub("countryger", "Study country", names(comp_df))
+
+names(comp_df) <- gsub("PerfExp2", "2: Perceived usefulness", names(comp_df))
+names(comp_df) <- gsub("EffExp2", "2: Perceived ease of use", names(comp_df))
+names(comp_df) <- gsub("anxty2", "2: Anxiety", names(comp_df))
+names(comp_df) <- gsub("dapriv2", "2: Privacy concerns", names(comp_df))
+names(comp_df) <- gsub("SocInf2", "2: Social influence", names(comp_df))
+names(comp_df) <- gsub("trust2", "2: Trust", names(comp_df))
+names(comp_df) <- gsub("BehInt2", "2: Behavioral intention", names(comp_df))
+names(comp_df) <- gsub("d2under3_1", "2: Tool understanding", names(comp_df))
+names(comp_df) <- gsub("countryger", "Study country", names(comp_df))
+
+comp_df_mum_1 <- comp_df %>% select(matches("^Perceived usefu|^Perceived eas|^Social in|^Trust|^Tool un|^Behavioral int|^Privacy co|^Anxie|Cognitive readiness|Age|Gender|Study country"))
+
+comp_df_mum_2 <- comp_df %>% select(matches("2: Perceived us|2: Perceived ease o|2: Social in|2: Trust|2: Tool un|2: Behavioral int|2: Privacy co|2: Anxie|Cognitive readiness|Age|Gender|Study country"))
+
+cor_tab_1 <- corstars(comp_df_mum_1, removeTriangle = "upper")
+cor_tab_2 <- corstars(comp_df_mum_2, removeTriangle = "lower")
+
+cor_tab_1 %>%
+  DT::datatable(
+    extensions = 'Buttons', 
+    options = list(dom = 'Bfrtip', 
+                   buttons = c('excel', "csv"),
+                   pageLength = 35,
+                  lengthMenu = c(20, 20, 20, 20)))
+
+cor_tab_2 %>%
+  DT::datatable(
+    extensions = 'Buttons', 
+    options = list(dom = 'Bfrtip', 
+                   buttons = c('excel', "csv"),
+                   pageLength = 35,
+                  lengthMenu = c(20, 20, 20, 20)))
+
+means_1 <- sprintf("%.1f", round(colMeans(comp_df_mum_1), 2))
+means_2 <- sprintf("%.1f", round(colMeans(comp_df_mum_2), 2))
+
+SDs_1 <- sprintf("%.1f", round(apply(comp_df_mum_1,2,sd), 2))
+SDs_2 <- sprintf("%.1f", round(apply(comp_df_mum_2,2,sd), 2))
+  
+  
+`M(SD) FB Tool` <- c(paste0(means_1[1:8], " (", SDs_1[1:8], ") "), paste0(means_1[9:12], " (", SDs_1[9:12], ")"))
+
+`M(SD) TR Tool` <- c(paste0(means_2[1:8], " (", SDs_2[1:8], ") "), paste0(means_1[9:12], " (", SDs_1[9:12], ")"))
+
+```
+
+```{r}
+#| include: false
+write.table(cor_tab_1, file = "Tables/cors_1.txt", sep = ",", quote = FALSE, row.names = T)
+write.table(cor_tab_2, file = "Tables/cors_2.txt", sep = ",", quote = FALSE, row.names = T)
+
+cor_tab_1[upper.tri(cor_tab_1)] <- cor_tab_2[upper.tri(cor_tab_2)]
+cor_tab_1 <- cbind(`M(SD) FB Tool`,  `M(SD) TR Tool`, cor_tab_1)
+
+varnames <- cor_tab_1 %>% transmute(observation = 1:n())
+varnames <- varnames$observation
+rownames(cor_tab_1) <- paste0("(", varnames, ") ", rownames(cor_tab_1))
+
+names(cor_tab_1[3:13]) <- paste0("(", varnames[1:11], ")")
+names(cor_tab_1) <- c(names(cor_tab_1)[1], names(cor_tab_1)[2], paste0("(", varnames[1:11], ")"))
+
+write.table(cor_tab_1, file = "Tables/cors.txt", sep = ",", quote = FALSE, row.names = T)
+```
+
+```{r}
+### FB Tool - reduced 
+model_full <- '
+cogread =~ cog_read_3 + cog_read_4 + cog_read_5
+
+PerfExp1 =~ PerfExp1_1 + PerfExp1_2 + PerfExp1_3 + PerfExp1_4 + PerfExp1_5
+EffExp1 =~ EffExp1_1 + EffExp1_2 + EffExp1_3 + EffExp1_4
+SocInf1 =~ SocInf1_1 + SocInf1_2 + SocInf1_3 + SocInf1_4 + SocInf1_5
+Trust1 =~ trust1_1 + trust1_2 + trust1_3
+d1under =~ d1under3_1
+BehInt1 =~ Beh_Int1_1 + Beh_Int1_2 + Beh_Int1_3
+d1under3_1 ~~ 0*d1under3_1
+
+# controls
+anxty1 =~  anxty1_2 + anxty1_3 + anxty1_4
+dapriv1 =~ dapriv1_1 + dapriv1_2 + dapriv1_3
+'
+library(dynamic)
+model_fit <- lavaan::cfa(model_full, data=data_all, missing = "fiml")
+#cfaHB(model_fit)
+
+cfa_FBTool_red <- lavaan::summary(model_fit, standardized=TRUE, fit = TRUE)
+
+```
+
+```{r}
+# FB Tool
+# cognitive readiness and specific tool understanding combined
+
+model_full <- '
+cogread =~ cog_read_3 + cog_read_4 + cog_read_5 + d1under3_1
+
+PerfExp1 =~ PerfExp1_1 + PerfExp1_2 + PerfExp1_3 + PerfExp1_4 + PerfExp1_5
+EffExp1 =~ EffExp1_1 + EffExp1_2 + EffExp1_3 + EffExp1_4
+SocInf1 =~ SocInf1_1 + SocInf1_2 + SocInf1_3 + SocInf1_4 + SocInf1_5
+Trust1 =~ trust1_1 + trust1_2 + trust1_3
+BehInt1 =~ Beh_Int1_1 + Beh_Int1_2 + Beh_Int1_3
+
+# controls
+anxty1 =~  anxty1_2 + anxty1_3 + anxty1_4
+dapriv1 =~ dapriv1_1 + dapriv1_2 + dapriv1_3
+'
+library(dynamic)
+model_fit_CRSU <- lavaan::cfa(model_full, data=data_all, missing = "fiml")
+#cfaHB(model_fit)
+
+cfa_FBTool_red_CRSU <- summary(model_fit_CRSU, standardized=TRUE, fit = TRUE)
+
+```
+
+```{r}
+library(semTools)
+fit_CRSU <- compareFit(model_fit, model_fit_CRSU)
+out_CU <- summary(fit_CRSU)
+```
+
+```{r}
+# FB Tool
+# perceived usefulness and perceived ease of use combined
+
+model_full <- '
+cogread =~ cog_read_3 + cog_read_4 + cog_read_5
+
+PerfExp1 =~ PerfExp1_1 + PerfExp1_2 + PerfExp1_3 + PerfExp1_4 + PerfExp1_5 + EffExp1_1 + EffExp1_2 + EffExp1_3 + EffExp1_4
+SocInf1 =~ SocInf1_1 + SocInf1_2 + SocInf1_3 + SocInf1_4 + SocInf1_5
+Trust1 =~ trust1_1 + trust1_2 + trust1_3
+d1under =~ d1under3_1
+BehInt1 =~ Beh_Int1_1 + Beh_Int1_2 + Beh_Int1_3
+d1under3_1 ~~ 0*d1under3_1
+
+# controls
+anxty1 =~  anxty1_2 + anxty1_3 + anxty1_4
+dapriv1 =~ dapriv1_1 + dapriv1_2 + dapriv1_3
+'
+library(dynamic)
+model_fit_PEEU <- lavaan::cfa(model_full, data=data_all, missing = "fiml")
+#cfaHB(model_fit)
+
+cfa_FBTool_PEEU <- summary(model_fit_PEEU, standardized=TRUE, fit = TRUE)
+
+```
+
+```{r}
+fit_PEEU <- compareFit(model_fit, model_fit_PEEU)
+out_PEEE <- summary(fit_PEEU)
+```
+
+```{r}
+# FB Tool
+# AI anxiety and data privacy concerns combined
+
+model_AD <- '
+cogread =~ cog_read_3 + cog_read_4 + cog_read_5
+
+PerfExp1 =~ PerfExp1_1 + PerfExp1_2 + PerfExp1_3 + PerfExp1_4 + PerfExp1_5
+EffExp1 =~ EffExp1_1 + EffExp1_2 + EffExp1_3 + EffExp1_4
+SocInf1 =~ SocInf1_1 + SocInf1_2 + SocInf1_3 + SocInf1_4 + SocInf1_5
+Trust1 =~ trust1_1 + trust1_2 + trust1_3
+d1under =~ d1under3_1
+BehInt1 =~ Beh_Int1_1 + Beh_Int1_2 + Beh_Int1_3
+d1under3_1 ~~ 0*d1under3_1
+
+# controls
+anxty1 =~  anxty1_2 + anxty1_3 + anxty1_4 + dapriv1_1 + dapriv1_2 + dapriv1_3
+'
+library(dynamic)
+model_AD <- lavaan::cfa(model_AD, data=data_all, missing = "fiml")
+#cfaHB(model_fit)
+
+cfa_FBTool_AD <- summary(model_AD, standardized=TRUE, fit = TRUE)
+```
+
+```{r}
+fit_AD <- compareFit(model_fit, model_AD)
+out_AD <- summary(fit_AD)
+```
+
+
+```{r}
+# FB Tool - SEM
+model_full <- '
+cogread =~ cog_read_3 + cog_read_4 + cog_read_5
+
+PerfExp1 =~ PerfExp1_1 + PerfExp1_2 + PerfExp1_3 + PerfExp1_4 + PerfExp1_5
+EffExp1 =~ EffExp1_1 + EffExp1_2 + EffExp1_3 + EffExp1_4
+SocInf1 =~ SocInf1_1 + SocInf1_2 + SocInf1_3 + SocInf1_4 + SocInf1_5
+Trust1 =~ trust1_1 + trust1_2 + trust1_3
+d1under =~ d1under3_1
+BehInt1 =~ Beh_Int1_1 + Beh_Int1_2 + Beh_Int1_3
+d1under3_1 ~~ 0*d1under3_1
+
+# controls
+anxty1 =~  anxty1_2 + anxty1_3 + anxty1_4
+dapriv1 =~ dapriv1_1 + dapriv1_2 + dapriv1_3
+
+BehInt1 ~ b1*PerfExp1 + b2*EffExp1 + SocInf1 + b3*Trust1 + 
+          cogread + 
+          d1under3_1 + 
+          dapriv1 +
+          anxty1  +
+          Age + Gender +
+          countryger
+PerfExp1 ~ a1*d1under3_1 + a11*cogread
+EffExp1 ~ a2*d1under3_1 + a22*cogread
+Trust1 ~ a3*d1under3_1 + a33*cogread
+
+PerfExp1 ~~ EffExp1 + Trust1 + SocInf1  + dapriv1 + anxty1 
+EffExp1 ~~ Trust1 + SocInf1  + dapriv1 + anxty1 
+Trust1 ~~ SocInf1  + dapriv1 + anxty1
+SocInf1 ~~ dapriv1 + anxty1 
+dapriv1 ~~ anxty1 
+
+# indirect effect (a*b)
+a1b1 := a1*b1
+a2b2 := a2*b2
+a3b3 := a3*b3
+
+a11b1 := a11*b1
+a22b2 := a22*b2
+a33b3 := a33*b3
+'
+library(dynamic)
+model_fit_SEM1 <- lavaan::cfa(model_full, data=data_all, missing = "fiml")
+#cfaHB(model_fit)
+
+sum_SEM1 <- summary(model_fit_SEM1, standardized=TRUE, fit = TRUE)
+
+```
+
+```{r}
+estimate <- parameterEstimates(model_fit_SEM1) %>% filter(op == "~" | op == ":=") %>% select(est)
+
+solution_sem <- standardizedSolution(model_fit_SEM1) %>% filter(op == "~" | op == ":=") %>% select(lhs, op, rhs, est.std, se, pvalue, ci.lower, ci.upper) %>% cbind(estimate, .)
+library(semhelpinghands)
+
+library(insight)
+library(gt)
+#solution_sem$pvalue <- format_p(solution_sem$pvalue, stars = FALSE, name = NULL)
+  
+solution_sem <- solution_sem %>% gt() %>% fmt_number(
+  c(est, est.std, se, ci.lower, ci.upper),
+  rows = everything(),
+  scale_by = 1.0,
+  decimals = 2,
+  drop_trailing_zeros = FALSE,
+  sep_mark = ",",
+  dec_mark = ".",
+  force_sign = FALSE,
+  locale = NULL
+) %>% data.frame(.)
+
+
+solution_sem <- solution_sem %>%  dplyr::mutate(
+  pvalue = as.numeric(pvalue)) %>% 
+    mutate(pvalue = format.pval(pvalue, digits = 3)) %>% 
+  mutate(pvalue = sub("^0$", "<.001", pvalue)) %>% 
+  mutate(pvalue = sub("^0.", ".", pvalue)) %>% 
+  mutate(est.std = sub("0.", ".", est.std)) %>% 
+  mutate(ci.lower = sub("0.", ".", ci.lower)) %>% 
+  mutate(ci.upper = sub("0.", ".", ci.upper))
+
+solution_sem <- solution_sem %>% select(lhs, rhs, est, se, est.std, ci.lower, ci.upper, pvalue)
+  
+write.table(solution_sem, file = "Tables/solution_sem.txt", sep = ",", quote = FALSE, row.names = T)
+
+
+fits1 <- fitMeasures(model_fit_SEM1)  %>% data.frame() %>% t(.) %>% data.frame() %>% gt() %>% fmt_number(
+  c(chisq, pvalue, cfi, tli, rmsea, srmr),
+  rows = everything(),
+  scale_by = 1.0,
+  decimals = 3,
+  drop_trailing_zeros = FALSE,
+  sep_mark = ",",
+  dec_mark = ".",
+  force_sign = FALSE,
+  locale = NULL
+) %>% data.frame(.) %>% select(chisq, df, pvalue, cfi, tli, rmsea, srmr)
+```
+
+```{r}
+# TR Tool - reduced 
+
+model_full <- '
+cogread =~ cog_read_3 + cog_read_4 + cog_read_5
+
+PerfExp2 =~ PerfExp2_1 + PerfExp2_2 + PerfExp2_3 + PerfExp2_4 + PerfExp2_5
+EffExp2 =~ EffExp2_1 + EffExp2_2 + EffExp2_3 + EffExp2_4
+SocInf2 =~ SocInf2_1 + SocInf2_2 + SocInf2_3 + SocInf2_5 + SocInf2_6
+Trust2 =~ trust2_1 + trust2_2 + trust2_3
+d2under =~ d2under3_1
+BehInt2 =~ Beh_Int2_1 + Beh_Int2_2 + Beh_Int2_3
+
+# controls
+anxty =~ anxty2_2 + anxty2_3 + anxty2_4
+dapriv =~ dapriv2_1 + dapriv2_2 + dapriv2_3
+
+d2under3_1 ~~ 0*d2under3_1
+'
+library(dynamic)
+model_fit2 <- lavaan::cfa(model_full, data=data_all, missing = "fiml")
+#cfaHB(model_fit)
+
+cfa_TRTool_red <- summary(model_fit2, standardized=TRUE, fit = TRUE)
+```
+
+```{r}
+# TR Tool  
+# cognitive readiness and specific tool understanding combined
+
+model_full <- '
+cogread =~ cog_read_3 + cog_read_4 + cog_read_5 + d2under3_1
+
+PerfExp2 =~ PerfExp2_1 + PerfExp2_2 + PerfExp2_3 + PerfExp2_4 + PerfExp2_5
+EffExp2 =~ EffExp2_1 + EffExp2_2 + EffExp2_3 + EffExp2_4
+SocInf2 =~ SocInf2_1 + SocInf2_2 + SocInf2_3 + SocInf2_5 + SocInf2_6
+Trust2 =~ trust2_1 + trust2_2 + trust2_3
+BehInt2 =~ Beh_Int2_1 + Beh_Int2_2 + Beh_Int2_3
+
+# controls
+anxty =~ anxty2_2 + anxty2_3 + anxty2_4
+dapriv =~ dapriv2_1 + dapriv2_2 + dapriv2_3
+
+'
+library(dynamic)
+model_fit_CRSU2 <- lavaan::cfa(model_full, data=data_all, missing = "fiml")
+#cfaHB(model_fit)
+
+cfa_TRTool_red_CRSU <- summary(model_fit_CRSU2, standardized=TRUE, fit = TRUE)
+```
+
+```{r}
+library(semTools)
+fit_CRSU2 <- compareFit(model_fit2, model_fit_CRSU2)
+out_CU2 <- summary(fit_CRSU2)
+```
+
+```{r}
+# TR Tool 
+# perceived usefulness and perceived ease of use combined
+
+model_full2 <- '
+cogread =~ cog_read_3 + cog_read_4 + cog_read_5
+
+PerfExp2 =~ PerfExp2_1 + PerfExp2_2 + PerfExp2_3 + PerfExp2_4 + PerfExp2_5 + EffExp2_1 + EffExp2_2 + EffExp2_3 + EffExp2_4
+SocInf2 =~ SocInf2_1 + SocInf2_2 + SocInf2_3 + SocInf2_5 + SocInf2_6
+Trust2 =~ trust2_1 + trust2_2 + trust2_3
+d2under =~ d2under3_1
+BehInt2 =~ Beh_Int2_1 + Beh_Int2_2 + Beh_Int2_3
+
+# controls
+anxty =~ anxty2_2 + anxty2_3 + anxty2_4
+dapriv =~ dapriv2_1 + dapriv2_2 + dapriv2_3
+
+d2under3_1 ~~ 0*d2under3_1
+'
+library(dynamic)
+model_fit2 <- lavaan::cfa(model_full, data=data_all, missing = "fiml")
+#cfaHB(model_fit)
+
+model_fit_PEEU2 <- lavaan::cfa(model_full2, data=data_all, missing = "fiml")
+#cfaHB(model_fit)
+
+cfa_TRTool_PEEU2 <- summary(model_fit_PEEU2, standardized=TRUE, fit = TRUE)
+
+```
+
+```{r}
+fit_PEEU2 <- compareFit(model_fit2, model_fit_PEEU2)
+out_PEEE2 <- summary(fit_PEEU2)
+```
+
+```{r}
+# TR Tool
+# AI anxiety and data privacy concerns combined
+
+model_full <- '
+cogread =~ cog_read_3 + cog_read_4 + cog_read_5
+
+PerfExp2 =~ PerfExp2_1 + PerfExp2_2 + PerfExp2_3 + PerfExp2_4 + PerfExp2_5
+EffExp2 =~ EffExp2_1 + EffExp2_2 + EffExp2_3 + EffExp2_4
+SocInf2 =~ SocInf2_1 + SocInf2_2 + SocInf2_3 + SocInf2_5 + SocInf2_6
+Trust2 =~ trust2_1 + trust2_2 + trust2_3
+d2under =~ d2under3_1
+BehInt2 =~ Beh_Int2_1 + Beh_Int2_2 + Beh_Int2_3
+
+# controls
+anxty =~ anxty2_2 + anxty2_3 + anxty2_4 + dapriv2_1 + dapriv2_2 + dapriv2_3
+
+d2under3_1 ~~ 0*d2under3_1
+'
+library(dynamic)
+model_AD <- lavaan::cfa(model_full, data=data_all, missing = "fiml")
+#cfaHB(model_fit)
+
+model_AD2 <- lavaan::cfa(model_AD, data=data_all, missing = "fiml")
+#cfaHB(model_fit)
+
+cfa_TRTool_AD <- summary(model_AD, standardized=TRUE, fit = TRUE)
+```
+
+```{r}
+fit_AD2 <- compareFit(model_fit2, model_AD2)
+out_AD2 <- summary(fit_AD2)
+
+out_AD2@nested$`Chisq diff`[2]
+```
+
+
+```{r}
+# TR Tool - SEM
+
+model_full2 <- '
+cogread =~ cog_read_3 + cog_read_4 + cog_read_5
+
+PerfExp2 =~ PerfExp2_1 + PerfExp2_2 + PerfExp2_3 + PerfExp2_4 + PerfExp2_5
+EffExp2 =~ EffExp2_1 + EffExp2_2 + EffExp2_3 + EffExp2_4
+SocInf2 =~ SocInf2_1 + SocInf2_2 + SocInf2_3 + SocInf2_5 + SocInf2_6
+Trust2 =~ trust2_1 + trust2_2 + trust2_3
+d2under =~ d2under3_1
+BehInt2 =~ Beh_Int2_1 + Beh_Int2_2 + Beh_Int2_3
+
+# controls
+anxty2 =~ anxty2_2 + anxty2_3 + anxty2_4
+dapriv2 =~ dapriv2_1 + dapriv2_2 + dapriv2_3
+
+d2under3_1 ~~ 0*d2under3_1
+
+
+BehInt2 ~ b1*PerfExp2 + b2*EffExp2 + SocInf2 + b3*Trust2 + 
+          cogread + 
+          d2under3_1 + 
+          dapriv2 +
+          anxty2  +
+          Age + Gender +
+          countryger
+PerfExp2 ~ a1*d2under3_1 + a11*cogread
+EffExp2 ~ a2*d2under3_1 + a22*cogread
+Trust2 ~ a3*d2under3_1 + a33*cogread
+
+PerfExp2 ~~ EffExp2 + Trust2 + SocInf2  + dapriv2 + anxty2
+EffExp2 ~~ Trust2 + SocInf2  + dapriv2 + anxty2
+Trust2 ~~ SocInf2  + dapriv2 + anxty2
+SocInf2 ~~ dapriv2 + anxty2
+dapriv2 ~~ anxty2
+
+# indirect effect (a*b)
+a1b1 := a1*b1
+a2b2 := a2*b2
+a3b3 := a3*b3
+
+a11b1 := a11*b1
+a22b2 := a22*b2
+a33b3 := a33*b3
+'
+library(dynamic)
+model_fit2 <- lavaan::cfa(model_full2, data=data_all, missing = "fiml")
+#cfaHB(model_fit)
+
+sem_TRTool <- summary(model_fit2, standardized=TRUE, fit = TRUE)
+```
+
+```{r}
+estimate <- parameterEstimates(model_fit2) %>% filter(op == "~" | op == ":=") %>% select(est)
+
+
+solution_sem <- standardizedSolution(model_fit2) %>% filter(op == "~" | op == ":=") %>% select(lhs, op, rhs, est.std, se, pvalue, ci.lower, ci.upper) %>% cbind(estimate, .)
+library(semhelpinghands)
+
+
+library(insight)
+library(gt)
+solution_sem <- solution_sem %>% gt() %>% fmt_number(
+  c(est, est.std, se, ci.lower, ci.upper),
+  rows = everything(),
+  scale_by = 1.0,
+  decimals = 2,
+  drop_trailing_zeros = FALSE,
+  sep_mark = ",",
+  dec_mark = ".",
+  force_sign = FALSE,
+  locale = NULL
+) %>% data.frame(.)
+
+
+solution_sem <- solution_sem %>%  dplyr::mutate(
+  pvalue = as.numeric(pvalue)) %>% 
+    mutate(pvalue = format.pval(pvalue, digits = 3)) %>% 
+  mutate(pvalue = sub("^0$", "<.001", pvalue)) %>% 
+  mutate(pvalue = sub("^0.", ".", pvalue)) %>% 
+  mutate(est.std = sub("0.", ".", est.std)) %>% 
+  mutate(ci.lower = sub("0.", ".", ci.lower)) %>% 
+  mutate(ci.upper = sub("0.", ".", ci.upper))
+
+solution_sem2 <- solution_sem %>% select(lhs, rhs, est, se, est.std, ci.lower, ci.upper, pvalue)
+  
+write.table(solution_sem2, file = "Tables/solution_sem2.txt", sep = ",", quote = FALSE, row.names = T)
+
+fits2 <- fitMeasures(model_fit2)  %>% data.frame() %>% t(.) %>% data.frame() %>% gt() %>% fmt_number(
+  c(chisq, pvalue, cfi, tli, rmsea, srmr),
+  rows = everything(),
+  scale_by = 1.0,
+  decimals = 3,
+  drop_trailing_zeros = FALSE,
+  sep_mark = ",",
+  dec_mark = ".",
+  force_sign = FALSE,
+  locale = NULL
+) %>% data.frame(.) %>% select(chisq, df, pvalue, cfi, tli, rmsea, srmr)
+
+solution_sem2 %>%  select(-rhs, -lhs)
+```
+
+```{r}
+chisq_cfa_FBTool <- paste0(round(cfa_FBTool_red$fit[["chisq"]], 2), "(", cfa_FBTool_red$fit[["df"]], ")")
+
+cfi_cfa_FBTool <- round(cfa_FBTool_red$fit[["cfi"]], 2)
+
+tli_cfa_FBTool <- round(cfa_FBTool_red$fit[["tli"]], 2)
+
+rmsea_cfa_FBTool <- round(cfa_FBTool_red$fit[["rmsea"]], 2)
+
+srmr_cfa_FBTool <- round(cfa_FBTool_red$fit[["srmr"]], 2)
+```
+
+Table 1 shows the means, standard deviations, and correlations. We specified the theoretical model with perceived usefulness, perceived ease of use, social influence, trust, cognitive readiness, specific tool understanding, the behavioral intention to use the tool, AI anxiety, and data privacy concerns to load on separate factors. The theoretical model fitted the data adequately (*FB Tool*: $\chi^2(df)$ = `r chisq_cfa_FBTool`, *p* < .001, CFI = `r cfi_cfa_FBTool`, TLI = `r tli_cfa_FBTool`, RMSEA = `r rmsea_cfa_FBTool`, SRMR = `r srmr_cfa_FBTool`; *TR Tool*: $\chi^2(df)$ = `r paste0(round(cfa_TRTool_red$fit[["chisq"]], 2), "(", cfa_TRTool_red$fit[["df"]], ")")`, *p* < .001, CFI = `r round(cfa_TRTool_red$fit[["cfi"]], 2)`, TLI = `r round(cfa_TRTool_red$fit[["tli"]], 2)`, RMSEA = `r round(cfa_TRTool_red$fit[["rmsea"]], 2)`, SRMR = `r round(cfa_TRTool_red$fit[["srmr"]], 2)`). \
+
+The theoretical model fit the data better than three more parsimonious models (i.e., cognitive readiness and specific tool understanding combined (*FB Tool*: $\Delta \chi^2(\Delta df)$ = `r paste0(round(abs(out_CU@nested$"Chisq diff"[2]),2), "(",out_CU@nested$"Df diff"[2] ,")")`, *p* < .001, *TR Tool*: $\Delta \chi^2(\Delta df)$ = `r paste0(round(abs(out_CU2@nested$"Chisq diff"[2]),2), "(",out_CU2@nested$"Df diff"[2],")")`, *p* < .001; perceived usefulness and perceived ease of use combined, *FB Tool*: $\Delta \chi^2(\Delta df)$ = `r paste0(round(abs(out_PEEE@nested$"Chisq diff"[2]),2), "(",out_PEEE@nested$"Df diff"[2] ,")")`, *p* < .001, *TR Tool*: $\Delta \chi^2(\Delta df)$ = `r paste0(round(abs(out_PEEE2@nested$"Chisq diff"[2]),2), "(",out_PEEE2@nested$"Df diff"[2],")")`, *p* < .001; and AI anxiety and data privacy concerns combined, *FB Tool*: $\Delta \chi^2(\Delta df)$ = `r paste0(round(abs(out_AD@nested$"Chisq diff"[2]),2), "(",out_AD@nested$"Df diff"[2] ,")")`, *p* < .001, *TR Tool*: $\Delta \chi^2(\Delta df)$ = `r paste0(round(abs(out_AD2@nested$"Chisq diff"[2]),2), "(",out_AD2@nested$"Df diff"[2] ,")")`, *p* < .001). We conclude that the model variables are sufficiently distinct. \
+
+To test *Hypotheses 1* through *4* and *Research Questions 1* and *2*, we specified two SEM (one for each tool) with the behavioral intention to use *FB Tool* and *TR Tool* to be predicted by the respective UTAUT variables (i.e., perceived usefulness, perceived ease of use, social influence, trust), tool understanding, cognitive readiness, and the control variables AI anxiety, data privacy concerns, age, male gender (0 = male, 1 = not male), and study country (1 = Germany, 0 = English-speaking countries). In addition, we added mediated pathways of the relationship between specific tool understanding and cognitive AI readiness with the intention to use the tools through perceived usefulness, perceived ease of use, and trust in the tool. No inflated standard errors were observed and we proceeded with the interpretation of the SEM without regularization. The results are shown in Table 2. @fig-medmodel displays the significant paths from the SEM path models. As can be seen from Table 2 and @fig-medmodel, the relevant paths differ between the two models. Perceived usefulness and social influence showed the expected positive relationships with the intention to use both tools, supporting *Hypotheses 1* and *3*. However, trust was unrelated to usage intention in both models, and perceived ease of use was unrelated to the intention to use *FB Tool* and negatively related to the intention to use *TR Tool*. Accordingly, we find no support for *Hypotheses 2* and *4*. AI anxiety was negatively related to usage intentions in both models. 
+Finally, the exploratory mediation analysis results suggest that the relationships between tool understanding and cognitive technology readiness with the intention to use *FB Tool* are not mediated through perceived usefulness, perceived ease of use, or trust. There was a negative mediation effect of the relationship between tool understanding and the intention to use *TR Tool* through perceived ease of use. That is, tool understanding was positively related to perceived ease of use, which, in turn, was negatively associated with usage intention. 
+
+```{r}
+#| include: true
+#| label: fig-medmodel
+#| fig-cap: The results of exploratory mediation analysis. Only non-zero paths and indirect effects are displayed. 
+library(grid)
+grid.raster(readTIFF("Figures/explor_med.tiff"))
+```
+
+# Discussion 
+
+## Principal Findings
+
+In recent years, there has been a rapid growth in the development of AI-enabled mental healthcare tools. To investigate the implementation challenges and potential user needs, in this study, we examined the intention to use two AI-enabled mental healthcare tools among psychology students and psychotherapists-in-training. The first tool provides feedback to the psychotherapist on their adherence to motivational interviewing techniques by analyzing data collected during psychotherapy sessions. The second tool uses patient voice samples to derive mood scores that the therapist may use for treatment decisions. An extended UTAUT model was used to analyze the results, which showed that perceived usefulness and social influence had a positive effect on the intention to use both tools. However, trust was unrelated to the intention to use both tools and perceived ease of use was unrelated (feedback tool) and even negatively related (treatment recommendation tool) to intention to use when considering all predictors in one model. \
+
+The findings of this study are partly in line with previous research on AI-CDSSs in medicine [@fan_etal20f; @zhai_etal21]. @fan_etal20f found positive associations between perceived usefulness and trust with usage intentions among a sample of healthcare professionals, and @zhai_etal21 reported positive relationships between perceived usefulness and social influence with the intention to use AI-assisted contouring technology among radiation oncologists. Furthermore, @tran_etal21e identified social influence as the only significant predictor of the intention to use AI-CDSSs among undergraduate medical students. @gado_etal22 found support for direct effects of perceived usefulness, AI knowledge, and perceived social norms on the intention to use AI, as well as indirect effects of perceived ease of use on usage intention via positive attitudes towards AI in a sample of psychology students. This consistent link between social influence and AI usage intentions found in studies using student samples may be explained by the greater susceptibility of students to the influence of peers and prospective employers [@hurst_good09]. As students have yet to develop a professional identity that shapes their work-related decisions, they may be more likely to align their decisions with the perceived expectations of influential others [@luyckx_etal13]. \
+
+
+The assessment of symptom severity often involves complex interactions with the patient and reflections on psychotherapeutic elements, which may make participants skeptical of a device that is perceived as being easy to use. One explanation for the null and negative relationships between perceived ease of use and  usage intentions for AI-generated recommendations in the mental health field may be the high stakes of accepting the tool’s advice. This interpretation might be supported by a study predicting intentions to learn about AI applications among medical staff [@lin_etal21], which found that perceived ease of use was the strongest predictor of the intention to learn how to use AI-enabled tools in healthcare. In combination with the results of the current study, it may be assumed that ease of use positively predicts interactions with AI-generated advice that align with the user’s level of competency and professionalism. That is, ease of use may positively predict learning intentions but maybe not the intention to use high-stakes mental health tools among students and trainees who have not yet gained profound professional experience. Students’ primary task at university is to learn and acquire skills and knowledge. The ease with which an AI-enabled tool can be applied likely becomes more relevant when the interaction with such tools is required or advantageous for their professional performance. More research is needed to understand the conditions under which perceived ease of use is positively related to AI usage intentions among medical and mental health practitioners and to explore the implications of the high stakes associated with AI-generated recommendations.\
+
+
+Trust in the tools was unrelated, while AI anxiety was negatively related to the intention to use both the feedback and treatment recommendation tools. One explanation for this finding may be participants’ limited insight into the functioning mechanisms of the tools. A profound assessment of their trust in the tools requires more in-depth knowledge than assessing their AI anxiety. Specifically, whether the AI tool “will provide data in [their] best interest”, “provides access to sincere and genuine feedback”, or “will perform its role of a supportive system very well” [@venkatesh_etal11] may be difficult to assess without having used the tool in practice and, thus, may be less relevant for students’ intention to use the tool. In contrast, AI anxiety represents intuitive, affective reactions, such as feeling apprehensive about the tool or being hesitant to use the tool for fear of making mistakes [@venkatesh_etal03]. Since students and psychotherapists-in-training have limited to no experience interacting with AI-generated feedback, they may base their decision-making on intuitive, emotional reactions better represented by AI anxiety than trust in the tools [@kwak_etal22b].\
+
+
+By differentiating between specific tool understanding and more general cognitive technology readiness, the current study moves beyond previous research that focused on the role of general AI knowledge in predicting general usage intention [@gado_etal22]. The mediation analyses revealed that none of the three UTAUT variables mediate the relationship between tool understanding/cognitive technology readiness with the intention to use the feedback tool. However, there was a positive relationship between cognitive technology readiness and the intention to use the feedback tool. This might indicate that general AI understanding may spur usage intentions of low-stakes AI-generated advice but not the intention to use AI advice for deriving treatment decisions. In addition, in line with the direct effects, perceived ease of use emerged as a negative mediator between specific tool understanding and the intention to use the treatment recommendation tool. The results of the exploratory mediation models highlight the relevance of distinguishing between different AI-enabled tools when assessing the relationship between different forms of AI knowledge and usage intentions.
+
+## Limitations and Future Directions
+
+The current study has some limitations. First, we collected data at only one time point. While cross-sectional designs are commonly chosen to investigate mechanisms predicted by the UTAUT [@fan_etal20; @zhai_etal21], it prevents the assessment of an order of effects. The adoption of AI-generated advice should be studied longitudinally to increase an understanding of use-predicting mechanisms. Second, while studying technology acceptance with deterministic models, such as UTAUT and TAM, has a long tradition, such studies have recently been criticized for their over-simplicity, lowering their explanatory power. In this vein, focusing on two specific AI-enabled mental health tools may be highlighted as a strength of the current study as it increases the ecological validity of the results. However, future research should seek to integrate organizational and system processes to provide a more profound understanding of the mechanisms preventing and promoting technology adoption. Other frameworks and theories, such as activity theory [@allen_etal11], adaptive structuration theory [@desanctis_poole94], and the NASSS framework [@greenhalgh_etal17] may serve as theoretical underpinnings of research investigating usage in context instead of focusing on individual-centered variables alone [@shachak_etal19]. Finally, we focused on psychology students and psychotherapists-in-training as a potential user group and found discrepancies in our results compared to previous research findings [@fan_etal20f; @tran_etal21e]. Future research should compare adoption and adoption intentions among multiple (potential) user groups and tools to shed light on tool-dependent and user-dependent predicting mechanisms.  
+
+# Conclusions
+
+The study provides insights into the individual implementation challenges of AI-enabled feedback and treatment recommendation tools used in mental healthcare. The results highlight the relevance of specific UTAUT predictors as general drivers of AI technology adoption in mental healthcare (i.e., perceived usefulness, social influence, and AI anxiety) and emphasize the need to distinguish between different AI technologies with reference to other influencing factors (i.e., perceived ease of use, cognitive technology readiness, and tool understanding). Future research should explore the conditions under which perceived ease of use is positively related to AI usage intentions among mental health practitioners.
+
+
+# Conflicts of interest 
+
+The authors have no conflicts of interests to declare.
+
+# References
+
+::: {#refs custom-style="Bibliography"}
+:::

@@ -1,0 +1,16 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Data preparation folder
+/Data_prep
+
+# Some folders
+/Manuscript_cache
+/Tables
+/Manuscript_files
+/OLD
+
+# Manuscript file
+Manuscript.docx
